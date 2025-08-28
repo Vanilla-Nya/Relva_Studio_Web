@@ -5,10 +5,10 @@
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Relva Studio",
+    "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
-    "_icons": [
+    "icons": [
         {
             "src": "icons/Icon-192.png",
             "sizes": "192x192",
@@ -33,4 +33,3 @@
         }
     ]
 }
-
