@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MapotekApp());
@@ -351,50 +352,6 @@ class HomePage extends StatelessWidget {
                         color: Colors.orange[600]!,
                       ),
                     ],
-                  ),
-                ],
-              ),
-            ),
-
-            // Testimonials Section
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 24),
-              color: Colors.grey[100],
-              child: Column(
-                children: [
-                  const Text(
-                    "Apa Kata Pengguna MAPOTEK?",
-                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 40),
-                  SizedBox(
-                    height: 200,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        _buildTestimonialCard(
-                          name: "Dr. Vellysia",
-                          comment: "Bisa bantu banget buat dokter mandiri ini",
-                          rating: 5,
-                        ),
-                        _buildTestimonialCard(
-                          name: "Dr. Ferdi",
-                          comment: "KEREN SIHHH DOKTER HARUS PAKE SIH INI, MEMBANTU BANGET",
-                          rating: 5,
-                        ),
-                        _buildTestimonialCard(
-                          name: "Dr. Alvin",
-                          comment: "Aplikasinya keren tinggal di terapin aja",
-                          rating: 5,
-                        ),
-                        _buildTestimonialCard(
-                          name: "Vanilla Nyan",
-                          comment: "Aplikasinya sangat menarik, UI nya bagus, gampang di pakai, simple, dan sangat berguna",
-                          rating: 5,
-                        ),
-                      ],
-                    ),
                   ),
                 ],
               ),
@@ -1114,6 +1071,17 @@ class PricingPage extends StatelessWidget {
 class DemoPage extends StatelessWidget {
   const DemoPage({super.key});
 
+  Future<void> _openUrl(BuildContext context, String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Tidak dapat membuka link download')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1168,7 +1136,10 @@ class DemoPage extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton.icon(
                           onPressed: () {
-                            // Handle download
+                            _openUrl(
+                              context,
+                              'https://drive.google.com/drive/folders/1aQWYkf5ulsRSFS8j5CMjvBAaWuHjgTC4?usp=drive_link',
+                            );
                           },
                           icon: const Icon(Icons.download, size: 28),
                           label: const Text(
@@ -1196,6 +1167,31 @@ class DemoPage extends StatelessWidget {
 
 class ContactPage extends StatelessWidget {
   const ContactPage({super.key});
+
+  Future<void> _openWhatsApp(BuildContext context, String phone) async {
+    final uri = Uri.parse('https://wa.me/$phone'); // phone: e.g. 6282132411163
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Tidak dapat membuka WhatsApp')));
+    }
+  }
+
+  Future<void> _openEmail(BuildContext context, String email) async {
+    final uri = Uri(
+      scheme: 'mailto',
+      path: email,
+      queryParameters: {
+        'subject': 'Pertanyaan MAPOTEK',
+        'body': 'Halo, saya ingin informasi tentang MAPOTEK...'
+      },
+    );
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Tidak dapat membuka email')));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1232,7 +1228,7 @@ class ContactPage extends StatelessWidget {
                       title: const Text("Telepon / WhatsApp", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                       subtitle: const Text("+62 821-3241-1163\nKontak langsung dengan tim pengembang", style: TextStyle(fontSize: 16)),
                       onTap: () {
-                        // Launch phone call or WhatsApp
+                        _openWhatsApp(context, '6282132411163');
                       },
                     ),
                     const Divider(),
@@ -1241,7 +1237,7 @@ class ContactPage extends StatelessWidget {
                       title: const Text("Email", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                       subtitle: const Text("Fontaro990@gmail.com\nRespon dalam 2-4 jam", style: TextStyle(fontSize: 16)),
                       onTap: () {
-                        // Launch email
+                        _openEmail(context, 'Fontaro990@gmail.com');
                       },
                     ),
                   ],
@@ -1276,41 +1272,13 @@ class ContactPage extends StatelessWidget {
                   _buildPurchaseStep("2", "Transfer Rp 150.000 ke rekening yang diberikan"),
                   _buildPurchaseStep("3", "Kirim bukti transfer"),
                   _buildPurchaseStep("4", "Terima link download + panduan instalasi"),
-                  _buildPurchaseStep("5", "Tim kami akan membantu setup jika diperlukan"),
+                  _buildPurchaseStep("5", "Tim kami akan membantu setup jika diperlukan (Kami Akan Datang Ke tempat Anda (Khusus daerah Bondowoso saja!))"),
                 ],
               ),
             ),
             
             const SizedBox(height: 40),
             
-            // Payment methods
-            Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: Colors.green[50],
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.green[200]!),
-              ),
-              child: Column(
-                children: [
-                  Icon(Icons.payment, size: 48, color: Colors.green[600]),
-                  const SizedBox(height: 16),
-                  const Text(
-                    "Metode Pembayaran",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    "• Transfer Bank BCA, BRI, Mandiri, BNI\n• E-Wallet: GoPay, OVO, DANA\n• Virtual Account tersedia",
-                    style: TextStyle(fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
