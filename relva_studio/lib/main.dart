@@ -411,12 +411,6 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    "Tim: Alfon Soetanto ",
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
-                    textAlign: TextAlign.center,
-                  ),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -823,14 +817,6 @@ class PricingPage extends StatelessWidget {
                             ),
                           ),
                         ],
-                      ),
-                      const Text(
-                        "Lisensi Seumur Hidup",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white70,
-                          fontWeight: FontWeight.w500,
-                        ),
                       ),
                       const SizedBox(height: 32),
                       Container(
