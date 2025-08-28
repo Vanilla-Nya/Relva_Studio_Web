@@ -50,10 +50,8 @@ class MapotekApp extends StatelessWidget {
         if (settings.name == '/imageDetail') {
           final args = settings.arguments as Map<String, dynamic>;
           return MaterialPageRoute(
-            builder: (context) => ImageDetailPage(
-              imagePath: args['imagePath'],
-              tag: args['tag'],
-            ),
+            builder: (context) =>
+                ImageDetailPage(imagePath: args['imagePath'], tag: args['tag']),
           );
         }
         return null;
@@ -99,7 +97,10 @@ class HomePage extends StatelessWidget {
             onPressed: () => Navigator.pushNamed(context, '/demo'),
             child: const Text(
               'Coba Demo',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           const SizedBox(width: 16),
@@ -161,25 +162,38 @@ class HomePage extends StatelessWidget {
                         icon: const Icon(Icons.download, size: 28),
                         label: const Text(
                           'Download Gratis',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange[600],
                           foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 20,
+                            horizontal: 40,
+                          ),
                         ),
                       ),
                       const SizedBox(width: 20),
                       OutlinedButton.icon(
-                        onPressed: () => Navigator.pushNamed(context, '/pricing'),
-                        icon: const Icon(Icons.price_check, color: Colors.white),
+                        onPressed: () =>
+                            Navigator.pushNamed(context, '/pricing'),
+                        icon: const Icon(
+                          Icons.price_check,
+                          color: Colors.white,
+                        ),
                         label: const Text(
                           'Lihat Harga',
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(color: Colors.white, width: 2),
-                          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 20,
+                            horizontal: 40,
+                          ),
                         ),
                       ),
                     ],
@@ -203,7 +217,9 @@ class HomePage extends StatelessWidget {
                   GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: MediaQuery.of(context).size.width > 600 ? 2 : 1,
+                    crossAxisCount: MediaQuery.of(context).size.width > 600
+                        ? 2
+                        : 1,
                     crossAxisSpacing: 24,
                     mainAxisSpacing: 24,
                     childAspectRatio: 1.5,
@@ -211,25 +227,29 @@ class HomePage extends StatelessWidget {
                       _buildProblemCard(
                         icon: Icons.book,
                         title: "Pencatatan Manual",
-                        description: "Data pasien masih dicatat di buku, sering hilang atau sulit dicari",
+                        description:
+                            "Data pasien masih dicatat di buku, sering hilang atau sulit dicari",
                         color: Colors.red[600]!,
                       ),
                       _buildProblemCard(
                         icon: Icons.inventory_2,
                         title: "Stok Obat Kacau",
-                        description: "Pengecekan stok obat manual, sering kehabisan tanpa disadari",
+                        description:
+                            "Pengecekan stok obat manual, sering kehabisan tanpa disadari",
                         color: Colors.orange[600]!,
                       ),
                       _buildProblemCard(
                         icon: Icons.assignment_ind,
                         title: "Absensi Kertas",
-                        description: "Absensi staf masih pakai kertas, mudah hilang dan tidak akurat",
+                        description:
+                            "Absensi staf masih pakai kertas, mudah hilang dan tidak akurat",
                         color: Colors.purple[600]!,
                       ),
                       _buildProblemCard(
                         icon: Icons.account_balance_wallet,
                         title: "Laporan Keuangan Berantakan",
-                        description: "Pencatatan keuangan sering terlupakan, laporan tidak terstruktur",
+                        description:
+                            "Pencatatan keuangan sering terlupakan, laporan tidak terstruktur",
                         color: Colors.indigo[600]!,
                       ),
                     ],
@@ -245,7 +265,11 @@ class HomePage extends StatelessWidget {
                 children: [
                   const Text(
                     "MAPOTEK Hadir Sebagai Solusi!",
-                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Color(0xFF2E7D8E)),
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF2E7D8E),
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 20),
@@ -328,7 +352,9 @@ class HomePage extends StatelessWidget {
                   GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: MediaQuery.of(context).size.width > 600 ? 3 : 1,
+                    crossAxisCount: MediaQuery.of(context).size.width > 600
+                        ? 3
+                        : 1,
                     crossAxisSpacing: 24,
                     mainAxisSpacing: 24,
                     childAspectRatio: 1.2,
@@ -336,19 +362,22 @@ class HomePage extends StatelessWidget {
                       _buildBenefitCard(
                         icon: Icons.speed,
                         title: "Praktik Lebih Profesional",
-                        description: "Kesan profesional untuk pasien dengan sistem terorganisir",
+                        description:
+                            "Kesan profesional untuk pasien dengan sistem terorganisir",
                         color: Colors.green[600]!,
                       ),
                       _buildBenefitCard(
                         icon: Icons.trending_up,
                         title: "Efisiensi Waktu",
-                        description: "Selesaikan urusan administratif dalam satu aplikasi",
+                        description:
+                            "Selesaikan urusan administratif dalam satu aplikasi",
                         color: Colors.blue[600]!,
                       ),
                       _buildBenefitCard(
                         icon: Icons.security,
                         title: "Data Terorganisir",
-                        description: "Semua data tersimpan rapi dan mudah diakses kapan saja",
+                        description:
+                            "Semua data tersimpan rapi dan mudah diakses kapan saja",
                         color: Colors.orange[600]!,
                       ),
                     ],
@@ -388,12 +417,18 @@ class HomePage extends StatelessWidget {
                     onPressed: () => Navigator.pushNamed(context, '/contact'),
                     child: const Text(
                       'Dapatkan MAPOTEK Sekarang',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange[600],
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 48),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 24,
+                        horizontal: 48,
+                      ),
                     ),
                   ),
                 ],
@@ -408,7 +443,11 @@ class HomePage extends StatelessWidget {
                 children: [
                   const Text(
                     "Dibuat oleh RELVA",
-                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
@@ -422,16 +461,27 @@ class HomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       TextButton(
-                        onPressed: () => Navigator.pushNamed(context, '/privacy'),
-                        child: const Text("Kebijakan Privasi", style: TextStyle(color: Colors.white)),
+                        onPressed: () =>
+                            Navigator.pushNamed(context, '/privacy'),
+                        child: const Text(
+                          "Kebijakan Privasi",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                       TextButton(
                         onPressed: () => Navigator.pushNamed(context, '/terms'),
-                        child: const Text("Syarat & Ketentuan", style: TextStyle(color: Colors.white)),
+                        child: const Text(
+                          "Syarat & Ketentuan",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                       TextButton(
-                        onPressed: () => Navigator.pushNamed(context, '/contact'),
-                        child: const Text("Kontak", style: TextStyle(color: Colors.white)),
+                        onPressed: () =>
+                            Navigator.pushNamed(context, '/contact'),
+                        child: const Text(
+                          "Kontak",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
@@ -532,20 +582,27 @@ class HomePage extends StatelessWidget {
               Row(
                 children: List.generate(
                   rating,
-                  (index) => Icon(Icons.star, color: Colors.orange[600], size: 20),
+                  (index) =>
+                      Icon(Icons.star, color: Colors.orange[600], size: 20),
                 ),
               ),
               const SizedBox(height: 12),
               Text(
                 comment,
-                style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontStyle: FontStyle.italic,
+                ),
                 maxLines: 4,
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 12),
               Text(
                 "- $name",
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -556,32 +613,67 @@ class HomePage extends StatelessWidget {
 
   Widget _buildFeaturesList() {
     final features = [
-      {'icon': Icons.login, 'title': 'Login Multi-Role', 'desc': 'Owner, Admin, dan Dokter dengan hak akses berbeda'},
-      {'icon': Icons.people, 'title': 'Manajemen Data Pasien', 'desc': 'Pencatatan pasien digital yang praktis dan aman'},
-      {'icon': Icons.medical_services, 'title': 'Pemantauan Stok Obat', 'desc': 'Monitoring stok obat otomatis dengan alert'},
-      {'icon': Icons.access_time, 'title': 'Absensi Staf Digital', 'desc': 'Sistem absensi yang efisien dan akurat'},
-      {'icon': Icons.analytics, 'title': 'Pencatatan Keuangan', 'desc': 'Laporan keuangan rapi dan terstruktur'},
-      {'icon': Icons.design_services, 'title': 'Antarmuka User-Friendly', 'desc': 'Desain simpel, clean, dan mudah digunakan'},
+      {
+        'icon': Icons.login,
+        'title': 'Login Multi-Role',
+        'desc': 'Owner, Admin, dan Dokter dengan hak akses berbeda',
+      },
+      {
+        'icon': Icons.people,
+        'title': 'Manajemen Data Pasien',
+        'desc': 'Pencatatan pasien digital yang praktis dan aman',
+      },
+      {
+        'icon': Icons.medical_services,
+        'title': 'Pemantauan Stok Obat',
+        'desc': 'Monitoring stok obat otomatis dengan alert',
+      },
+      {
+        'icon': Icons.access_time,
+        'title': 'Absensi Staf Digital',
+        'desc': 'Sistem absensi yang efisien dan akurat',
+      },
+      {
+        'icon': Icons.analytics,
+        'title': 'Pencatatan Keuangan',
+        'desc': 'Laporan keuangan rapi dan terstruktur',
+      },
+      {
+        'icon': Icons.design_services,
+        'title': 'Antarmuka User-Friendly',
+        'desc': 'Desain simpel, clean, dan mudah digunakan',
+      },
     ];
 
     return Column(
-      children: features.map((feature) => Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundColor: const Color(0xFF2E7D8E),
-            child: Icon(feature['icon'] as IconData, color: Colors.white, size: 28),
-          ),
-          title: Text(
-            feature['title'] as String,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          subtitle: Text(
-            feature['desc'] as String,
-            style: const TextStyle(fontSize: 16),
-          ),
-        ),
-      )).toList(),
+      children: features
+          .map(
+            (feature) => Container(
+              margin: const EdgeInsets.only(bottom: 16),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: const Color(0xFF2E7D8E),
+                  child: Icon(
+                    feature['icon'] as IconData,
+                    color: Colors.white,
+                    size: 28,
+                  ),
+                ),
+                title: Text(
+                  feature['title'] as String,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Text(
+                  feature['desc'] as String,
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ),
+            ),
+          )
+          .toList(),
     );
   }
 }
@@ -603,14 +695,19 @@ class FeaturesPage extends StatelessWidget {
           children: [
             const Text(
               "✨ Fitur Unggulan MAPOTEK",
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Color(0xFF2E7D8E)),
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF2E7D8E),
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 40),
             _buildDetailedFeatureCard(
               icon: Icons.login,
               title: "🔐 Login Multi-Role",
-              description: "Sistem login dengan pembagian hak akses untuk Owner, Admin, dan Dokter. Setiap role memiliki fitur dan akses yang berbeda sesuai kebutuhan.",
+              description:
+                  "Sistem login dengan pembagian hak akses untuk Owner, Admin, dan Dokter. Setiap role memiliki fitur dan akses yang berbeda sesuai kebutuhan.",
               features: [
                 "Owner: Akses penuh ke semua fitur",
                 "Admin: Manajemen data dan laporan",
@@ -620,7 +717,8 @@ class FeaturesPage extends StatelessWidget {
             _buildDetailedFeatureCard(
               icon: Icons.people,
               title: "🧾 Manajemen Data Pasien",
-              description: "Sistem pencatatan pasien digital yang praktis menggantikan buku manual. Data tersimpan aman dan mudah dicari.",
+              description:
+                  "Sistem pencatatan pasien digital yang praktis menggantikan buku manual. Data tersimpan aman dan mudah dicari.",
               features: [
                 "Pencatatan data pasien lengkap",
                 "History kunjungan dan diagnosa",
@@ -631,7 +729,8 @@ class FeaturesPage extends StatelessWidget {
             _buildDetailedFeatureCard(
               icon: Icons.medical_services,
               title: "💊 Pemantauan Stok Obat Otomatis",
-              description: "Sistem monitoring stok obat real-time dengan alert otomatis ketika stok menipis atau mendekati expired.",
+              description:
+                  "Sistem monitoring stok obat real-time dengan alert otomatis ketika stok menipis atau mendekati expired.",
               features: [
                 "Tracking stok obat real-time",
                 "Alert stok minimum",
@@ -642,7 +741,8 @@ class FeaturesPage extends StatelessWidget {
             _buildDetailedFeatureCard(
               icon: Icons.access_time,
               title: "🕒 Absensi Staf Digital",
-              description: "Sistem absensi digital yang menggantikan pencatatan manual. Lebih akurat dan tidak mudah hilang.",
+              description:
+                  "Sistem absensi digital yang menggantikan pencatatan manual. Lebih akurat dan tidak mudah hilang.",
               features: [
                 "Absensi digital untuk semua staf",
                 "Tracking jam kerja",
@@ -653,7 +753,8 @@ class FeaturesPage extends StatelessWidget {
             _buildDetailedFeatureCard(
               icon: Icons.analytics,
               title: "💰 Pencatatan Keuangan",
-              description: "Sistem keuangan terintegrasi yang mencatat semua transaksi secara otomatis dan menghasilkan laporan yang rapi.",
+              description:
+                  "Sistem keuangan terintegrasi yang mencatat semua transaksi secara otomatis dan menghasilkan laporan yang rapi.",
               features: [
                 "Pencatatan transaksi otomatis",
                 "Laporan keuangan harian/bulanan",
@@ -664,7 +765,8 @@ class FeaturesPage extends StatelessWidget {
             _buildDetailedFeatureCard(
               icon: Icons.design_services,
               title: "🎨 Antarmuka User-Friendly",
-              description: "Desain yang simpel, clean, dan mudah digunakan. Tidak rumit seperti sistem rumah sakit, sesuai kebutuhan praktik pribadi.",
+              description:
+                  "Desain yang simpel, clean, dan mudah digunakan. Tidak rumit seperti sistem rumah sakit, sesuai kebutuhan praktik pribadi.",
               features: [
                 "Interface yang intuitif",
                 "Navigasi yang mudah dipahami",
@@ -704,7 +806,10 @@ class FeaturesPage extends StatelessWidget {
                   Expanded(
                     child: Text(
                       title,
-                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -715,22 +820,28 @@ class FeaturesPage extends StatelessWidget {
                 style: const TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 16),
-              ...features.map((feature) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Icon(Icons.check_circle, color: Color(0xFF2E7D8E), size: 20),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        feature,
-                        style: const TextStyle(fontSize: 14),
+              ...features.map(
+                (feature) => Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Icon(
+                        Icons.check_circle,
+                        color: Color(0xFF2E7D8E),
+                        size: 20,
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          feature,
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              )),
+              ),
             ],
           ),
         ),
@@ -760,7 +871,7 @@ class PricingPage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 40),
-            
+
             // Main pricing card
             Card(
               elevation: 16,
@@ -777,7 +888,10 @@ class PricingPage extends StatelessWidget {
                   child: Column(
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.orange[600],
                           borderRadius: BorderRadius.circular(25),
@@ -862,16 +976,20 @@ class PricingPage extends StatelessWidget {
                               "✅ Update Gratis Selamanya",
                               "✅ Panduan Instalasi & Setup",
                               "✅ Support Teknis",
-                            ].map((feature) => Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: Text(
-                                feature,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
+                            ].map(
+                              (feature) => Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 4,
+                                ),
+                                child: Text(
+                                  feature,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                            )),
+                            ),
                           ],
                         ),
                       ),
@@ -904,9 +1022,9 @@ class PricingPage extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 40),
-            
+
             // Comparison section
             Container(
               padding: const EdgeInsets.all(24),
@@ -934,9 +1052,7 @@ class PricingPage extends StatelessWidget {
                     },
                     children: [
                       const TableRow(
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                        ),
+                        decoration: BoxDecoration(color: Colors.green),
                         children: [
                           Padding(
                             padding: EdgeInsets.all(12),
@@ -972,19 +1088,35 @@ class PricingPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      _buildComparisonRow("Pencatatan Pasien", "Buku & Kertas", "Digital & Aman"),
-                      _buildComparisonRow("Stok Obat", "Cek Manual", "Otomatis"),
+                      _buildComparisonRow(
+                        "Pencatatan Pasien",
+                        "Buku & Kertas",
+                        "Digital & Aman",
+                      ),
+                      _buildComparisonRow(
+                        "Stok Obat",
+                        "Cek Manual",
+                        "Otomatis",
+                      ),
                       _buildComparisonRow("Absensi", "Kertas", "Digital"),
-                      _buildComparisonRow("Laporan Keuangan", "Ribet & Berantakan", "Otomatis & Rapi"),
-                      _buildComparisonRow("Backup Data", "Tidak Ada", "Otomatis"),
+                      _buildComparisonRow(
+                        "Laporan Keuangan",
+                        "Ribet & Berantakan",
+                        "Otomatis & Rapi",
+                      ),
+                      _buildComparisonRow(
+                        "Backup Data",
+                        "Tidak Ada",
+                        "Otomatis",
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 40),
-            
+
             // Money back guarantee
             Container(
               padding: const EdgeInsets.all(24),
@@ -999,10 +1131,7 @@ class PricingPage extends StatelessWidget {
                   const SizedBox(height: 16),
                   const Text(
                     "Jaminan Kepuasan 100%",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   const Text(
@@ -1096,7 +1225,11 @@ class DemoPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.desktop_windows, size: 120, color: const Color(0xFF2E7D8E)),
+              Icon(
+                Icons.desktop_windows,
+                size: 120,
+                color: const Color(0xFF2E7D8E),
+              ),
               const SizedBox(height: 32),
               const Text(
                 "Download MAPOTEK Desktop",
@@ -1110,7 +1243,7 @@ class DemoPage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 40),
-              
+
               Card(
                 elevation: 8,
                 child: Padding(
@@ -1119,7 +1252,10 @@ class DemoPage extends StatelessWidget {
                     children: [
                       const Text(
                         "Persyaratan Sistem:",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(height: 16),
                       const Column(
@@ -1144,7 +1280,10 @@ class DemoPage extends StatelessWidget {
                           icon: const Icon(Icons.download, size: 28),
                           label: const Text(
                             "Download Sekarang",
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF2E7D8E),
@@ -1171,9 +1310,15 @@ class ContactPage extends StatelessWidget {
   Future<void> _openWhatsApp(BuildContext context, String phone) async {
     final uri = Uri.parse('https://wa.me/$phone'); // phone: e.g. 6282132411163
     if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
+      await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+        webOnlyWindowName: "_blank",
+      );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Tidak dapat membuka WhatsApp')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Tidak dapat membuka WhatsApp')),
+      );
     }
   }
 
@@ -1183,13 +1328,15 @@ class ContactPage extends StatelessWidget {
       path: email,
       queryParameters: {
         'subject': 'Pertanyaan MAPOTEK',
-        'body': 'Halo, saya ingin informasi tentang MAPOTEK...'
+        'body': 'Halo, saya ingin informasi tentang MAPOTEK...',
       },
     );
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Tidak dapat membuka email')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Tidak dapat membuka email')),
+      );
     }
   }
 
@@ -1217,25 +1364,51 @@ class ContactPage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 40),
-            
+
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   children: [
                     ListTile(
-                      leading: const Icon(Icons.phone, color: Color(0xFF2E7D8E), size: 32),
-                      title: const Text("Telepon / WhatsApp", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                      subtitle: const Text("+62 821-3241-1163\nKontak langsung dengan tim pengembang", style: TextStyle(fontSize: 16)),
+                      leading: const Icon(
+                        Icons.phone,
+                        color: Color(0xFF2E7D8E),
+                        size: 32,
+                      ),
+                      title: const Text(
+                        "Telepon / WhatsApp",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: const Text(
+                        "+62 821-3241-1163\nKontak langsung dengan tim pengembang",
+                        style: TextStyle(fontSize: 16),
+                      ),
                       onTap: () {
                         _openWhatsApp(context, '6282132411163');
                       },
                     ),
                     const Divider(),
                     ListTile(
-                      leading: const Icon(Icons.email, color: Color(0xFF2E7D8E), size: 32),
-                      title: const Text("Email", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                      subtitle: const Text("Fontaro990@gmail.com\nRespon dalam 2-4 jam", style: TextStyle(fontSize: 16)),
+                      leading: const Icon(
+                        Icons.email,
+                        color: Color(0xFF2E7D8E),
+                        size: 32,
+                      ),
+                      title: const Text(
+                        "Email",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: const Text(
+                        "Fontaro990@gmail.com\nRespon dalam 2-4 jam",
+                        style: TextStyle(fontSize: 16),
+                      ),
                       onTap: () {
                         _openEmail(context, 'Fontaro990@gmail.com');
                       },
@@ -1244,9 +1417,9 @@ class ContactPage extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 40),
-            
+
             // Purchase steps
             Container(
               width: double.infinity,
@@ -1268,17 +1441,28 @@ class ContactPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  _buildPurchaseStep("1", "Hubungi kami via WhatsApp atau Email"),
-                  _buildPurchaseStep("2", "Transfer Rp 150.000 ke rekening yang diberikan"),
+                  _buildPurchaseStep(
+                    "1",
+                    "Hubungi kami via WhatsApp atau Email",
+                  ),
+                  _buildPurchaseStep(
+                    "2",
+                    "Transfer Rp 150.000 ke rekening yang diberikan",
+                  ),
                   _buildPurchaseStep("3", "Kirim bukti transfer"),
-                  _buildPurchaseStep("4", "Terima link download + panduan instalasi"),
-                  _buildPurchaseStep("5", "Tim kami akan membantu setup jika diperlukan (Kami Akan Datang Ke tempat Anda (Khusus daerah Bondowoso saja!))"),
+                  _buildPurchaseStep(
+                    "4",
+                    "Terima link download + panduan instalasi",
+                  ),
+                  _buildPurchaseStep(
+                    "5",
+                    "Tim kami akan membantu setup jika diperlukan (Kami Akan Datang Ke tempat Anda (Khusus daerah Bondowoso saja!))",
+                  ),
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 40),
-            
           ],
         ),
       ),
@@ -1312,10 +1496,7 @@ class ContactPage extends StatelessWidget {
           Expanded(
             child: Text(
               description,
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.white,
-              ),
+              style: const TextStyle(fontSize: 16, color: Colors.white),
             ),
           ),
         ],
@@ -1328,7 +1509,11 @@ class ImageDetailPage extends StatelessWidget {
   final String imagePath;
   final String tag;
 
-  const ImageDetailPage({super.key, required this.imagePath, required this.tag});
+  const ImageDetailPage({
+    super.key,
+    required this.imagePath,
+    required this.tag,
+  });
 
   @override
   Widget build(BuildContext context) {
