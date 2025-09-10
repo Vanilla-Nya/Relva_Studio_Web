@@ -68,7 +68,7 @@ class CustomerPage extends StatelessWidget {
                     // Send formData as a POST request to the specified URL
                     Future<void> sendData() async {
                       final url = Uri.parse(
-                        'http://localhost:3000/api/duitku-inquiry',
+                        'https://relva-studio-backend.onrender.com/api/duitku-inquiry',
                       );
                       try {
                         final response = await Future.delayed(
