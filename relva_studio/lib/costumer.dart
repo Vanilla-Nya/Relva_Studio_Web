@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomerPage extends StatelessWidget {
   const CustomerPage({super.key});
@@ -132,22 +133,60 @@ class CustomerPage extends StatelessWidget {
                         );
                         if (response.statusCode == 200) {
                           // Success
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Data sent successfully!'),
-                            ),
-                          );
+                          final responseData = jsonDecode(response.body);
+                          final paymentUrl = responseData['paymentUrl'];
+                          if (paymentUrl != null) {
+                            if (context.mounted) {
+                              await Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => Scaffold(
+                                    appBar: AppBar(
+                                      title: const Text('Payment'),
+                                    ),
+                                    body: Center(
+                                      child: ElevatedButton(
+                                        onPressed: () async {
+                                          // Open the paymentUrl in the browser
+                                          // You need to add url_launcher package in pubspec.yaml
+                                          // import 'package:url_launcher/url_launcher.dart';
+                                          if (context.mounted) {
+                                            if (await canLaunchUrl(
+                                              paymentUrl,
+                                            )) {
+                                              await launchUrl(paymentUrl);
+                                            }
+                                          }
+                                        },
+                                        child: const Text('Open Payment URL'),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                          }
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Data sent successfully!'),
+                              ),
+                            );
+                          }
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Failed: ${response.statusCode}'),
-                            ),
-                          );
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Failed: ${response.statusCode}'),
+                              ),
+                            );
+                          }
                         }
                       } catch (e) {
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(SnackBar(content: Text('Error: $e')));
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text('Error: $e')));
+                        }
                       }
                     }
 
