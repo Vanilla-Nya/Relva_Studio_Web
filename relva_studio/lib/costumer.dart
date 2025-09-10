@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:crypto/crypto.dart';
 
 class CustomerPage extends StatelessWidget {
   const CustomerPage({super.key});
@@ -67,7 +68,7 @@ class CustomerPage extends StatelessWidget {
                     // Send formData as a POST request to the specified URL
                     Future<void> sendData() async {
                       final url = Uri.parse(
-                        'https://sandbox.duitku.com/webapi/api/merchant/v2/inquiry',
+                        'http://localhost:3000/api/duitku-inquiry',
                       );
                       try {
                         final response = await Future.delayed(
@@ -77,56 +78,7 @@ class CustomerPage extends StatelessWidget {
                               await post(
                                 url,
                                 headers: {'Content-Type': 'application/json'},
-                                body: jsonEncode({
-                                  "merchantCode": "DS24853",
-                                  "paymentAmount": "20000",
-                                  "paymentMethod": "VA",
-                                  "merchantOrderId": "1757298753507",
-                                  "productDetails":
-                                      "Pembayaran untuk Toko Contoh",
-                                  "additionalParam": "",
-                                  "merchantUserInfo": "",
-                                  "customerVaName":
-                                      "${formData['firstname']} ${formData['lastname']}",
-                                  "email": "${formData['email']}",
-                                  "phoneNumber": "${formData['phoneNumber']}",
-                                  "itemDetails": [
-                                    {
-                                      "name": "Test Item 1",
-                                      "price": 150000,
-                                      "quantity": 1,
-                                    },
-                                  ],
-                                  "customerDetail": {
-                                    "firstName": "${formData['firstname']}",
-                                    "lastName": "${formData['lastname']}",
-                                    "email": "${formData['email']}",
-                                    "phoneNumber": "${formData['phoneNumber']}",
-                                    "billingAddress": {
-                                      "firstName": "${formData['firstname']}",
-                                      "lastName": "${formData['lastname']}",
-                                      "address": "${formData['address']}",
-                                      "city": "${formData['city']}",
-                                      "postalCode": "${formData['postalCode']}",
-                                      "phone": "${formData['phoneNumber']}",
-                                      "countryCode": "ID",
-                                    },
-                                    "shippingAddress": {
-                                      "firstName": "${formData['firstname']}",
-                                      "lastName": "${formData['lastname']}",
-                                      "address": "${formData['address']}",
-                                      "city": "${formData['city']}",
-                                      "postalCode": "${formData['postalCode']}",
-                                      "phone": "${formData['phoneNumber']}",
-                                      "countryCode": "ID",
-                                    },
-                                  },
-                                  "callbackUrl": "YOUR_MOCK_URL/callback",
-                                  "returnUrl": "YOUR_MOCK_URL/return",
-                                  "signature":
-                                      "04eacfa14f89819777f843fd16378f3d",
-                                  "expiryPeriod": 15,
-                                }),
+                                body: jsonEncode(formData),
                               ),
                             );
                           },
@@ -151,9 +103,14 @@ class CustomerPage extends StatelessWidget {
                                           // import 'package:url_launcher/url_launcher.dart';
                                           if (context.mounted) {
                                             if (await canLaunchUrl(
-                                              paymentUrl,
+                                              Uri.parse(paymentUrl),
                                             )) {
-                                              await launchUrl(paymentUrl);
+                                              await launchUrl(
+                                                Uri.parse(paymentUrl),
+                                                mode: LaunchMode
+                                                    .externalApplication,
+                                                webOnlyWindowName: "_blank",
+                                              );
                                             }
                                           }
                                         },
