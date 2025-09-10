@@ -1326,6 +1326,21 @@ class ContactPage extends StatelessWidget {
     }
   }
 
+  Future<void> _openMaps(BuildContext context, String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+        webOnlyWindowName: '_blank',
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Tidak dapat membuka maps')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1397,6 +1412,28 @@ class ContactPage extends StatelessWidget {
                       ),
                       onTap: () {
                         _openEmail(context, 'Fontaro990@gmail.com');
+                      },
+                    ),
+                    const Divider(),
+                    ListTile(
+                      leading: const Icon(
+                        Icons.location_city,
+                        color: Color(0xFF2E7D8E),
+                        size: 32,
+                      ),
+                      title: const Text(
+                        "Lokasi",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: const Text(
+                        "Dusun Krajan RT02/RW01 Kecamatan Pujer (Praktek Dokter Umum Dr. Agoes), BONDOWOSO, JAWA TIMUR 68271",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      onTap: () {
+                        _openMaps(context, 'https://maps.app.goo.gl/qQefnsiEq5GQddje8');
                       },
                     ),
                   ],
