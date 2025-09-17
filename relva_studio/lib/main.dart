@@ -52,7 +52,7 @@ class MapotekApp extends StatelessWidget {
         '/contact': (context) => const ContactPage(),
         '/privacy': (context) => const PrivacyPolicyPage(),
         '/terms': (context) => const TermsPage(),
-        '/customers': (context) => const CustomerPage(),
+        '/customers': (context) => const EnhancedCustomerPage(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/imageDetail') {
