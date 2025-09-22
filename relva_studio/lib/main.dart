@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:relva_studio/contact.dart';
-import 'package:relva_studio/costumer.dart';
-import 'package:relva_studio/demo.dart';
-import 'package:relva_studio/feature.dart';
-import 'package:relva_studio/home.dart';
-import 'package:relva_studio/image_detail.dart';
-import 'package:relva_studio/pricing.dart';
-import 'package:relva_studio/privacy_policy.dart';
-import 'package:relva_studio/relvastudioapp.dart' as relva;
-import 'package:relva_studio/terms.dart';
+import 'package:relva_studio/Mapotek/contact.dart';
+import 'package:relva_studio/Mapotek/costumer.dart';
+import 'package:relva_studio/Mapotek/demo.dart';
+import 'package:relva_studio/Mapotek/feature.dart';
+import 'package:relva_studio/Mapotek/home.dart';
+import 'package:relva_studio/Mapotek/image_detail.dart';
+import 'package:relva_studio/Mapotek/pricing.dart';
+import 'package:relva_studio/Mapotek/privacy_policy.dart';
+import 'package:relva_studio/Mapotek/terms.dart';
+import 'package:relva_studio/relvastudio/relva_app.dart';
 
 void main() {
-  runApp(const relva.RelvaApp()); 
+  runApp(const MainApp());
 }
 
-class MapotekApp extends StatelessWidget {
-  const MapotekApp({super.key});
-  
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MAPOTEK - Solusi Cerdas untuk Praktik Dokter di Rumah',
+      title: 'Relva Studio',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         primaryColor: const Color(0xFF2E7D8E),
@@ -44,20 +44,24 @@ class MapotekApp extends StatelessWidget {
           ),
         ),
       ),
-      initialRoute: '/',
+      initialRoute: '/', // This will show Relva website first
       routes: {
-        '/': (context) => const HomePage(),
-        '/features': (context) => const FeaturesPage(),
-        '/pricing': (context) => const PricingPage(),
-        '/demo': (context) => const DemoPage(),
-        '/contact': (context) => const ContactPage(),
-        '/privacy': (context) => const PrivacyPolicyPage(),
-        '/terms': (context) => const TermsPage(),
-        '/customers': (context) => const EnhancedCustomerPage(),
-        '/relva': (context) => const relva.RelvaApp(),
+        // Relva Studio Website Routes
+        '/': (context) => const RelvaApp(),
+        
+        // MAPOTEK App Routes
+        '/mapotek': (context) => const MapotekApp(),
+        '/mapotek/home': (context) => const HomePage(),
+        '/mapotek/features': (context) => const FeaturesPage(),
+        '/mapotek/pricing': (context) => const PricingPage(),
+        '/mapotek/demo': (context) => const DemoPage(),
+        '/mapotek/contact': (context) => const ContactPage(),
+        '/mapotek/privacy': (context) => const PrivacyPolicyPage(),
+        '/mapotek/terms': (context) => const TermsPage(),
+        '/mapotek/customers': (context) => const EnhancedCustomerPage(),
       },
       onGenerateRoute: (settings) {
-        if (settings.name == '/imageDetail') {
+        if (settings.name == '/mapotek/imageDetail') {
           final args = settings.arguments as Map<String, dynamic>;
           return MaterialPageRoute(
             builder: (context) =>
@@ -67,5 +71,15 @@ class MapotekApp extends StatelessWidget {
         return null;
       },
     );
+  }
+}
+
+// MAPOTEK App as a separate widget
+class MapotekApp extends StatelessWidget {
+  const MapotekApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const HomePage(); // This shows the MAPOTEK home page
   }
 }
