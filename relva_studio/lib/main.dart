@@ -3,20 +3,20 @@ import 'package:relva_studio/contact.dart';
 import 'package:relva_studio/costumer.dart';
 import 'package:relva_studio/demo.dart';
 import 'package:relva_studio/feature.dart';
-import 'package:relva_studio/home.dart';
+import 'package:relva_studio/home.dart' as home;
 import 'package:relva_studio/image_detail.dart';
 import 'package:relva_studio/pricing.dart';
 import 'package:relva_studio/privacy_policy.dart';
-import 'package:relva_studio/relvastudioapp.dart' as relva;
+import 'package:relva_studio/relvastudioapp.dart';
 import 'package:relva_studio/terms.dart';
 
 void main() {
-  runApp(const relva.RelvaApp()); 
+  runApp(const MapotekApp());
 }
 
 class MapotekApp extends StatelessWidget {
   const MapotekApp({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,7 +46,7 @@ class MapotekApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomePage(),
+        '/': (context) => const RelvaApp(),
         '/features': (context) => const FeaturesPage(),
         '/pricing': (context) => const PricingPage(),
         '/demo': (context) => const DemoPage(),
@@ -54,7 +54,7 @@ class MapotekApp extends StatelessWidget {
         '/privacy': (context) => const PrivacyPolicyPage(),
         '/terms': (context) => const TermsPage(),
         '/customers': (context) => const EnhancedCustomerPage(),
-        '/relva': (context) => const relva.RelvaApp(),
+        // '/relva': (context) => const RelvaApp(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/imageDetail') {

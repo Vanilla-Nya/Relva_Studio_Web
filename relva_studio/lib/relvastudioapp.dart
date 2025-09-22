@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:relva_studio/feature.dart';
 
-void main() {
-  runApp(const RelvaApp());
-}
-
 class RelvaApp extends StatelessWidget {
   const RelvaApp({super.key});
 
@@ -24,9 +20,7 @@ class RelvaApp extends StatelessWidget {
       home: const MainPage(),
       debugShowCheckedModeBanner: false,
       // Add routes to connect to MAPOTEK pages
-      routes: {
-        '/feature': (context) => const FeaturesPage(),
-      },
+      routes: {'/feature': (context) => const FeaturesPage()},
     );
   }
 }
@@ -81,10 +75,7 @@ class MapotekLandingPage extends StatelessWidget {
               const SizedBox(height: 16),
               const Text(
                 'Solusi Cerdas untuk Praktik Dokter di Rumah',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black87,
-                ),
+                style: TextStyle(fontSize: 20, color: Colors.black87),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 40),
@@ -108,7 +99,10 @@ class MapotekLandingPage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF2E7D8E),
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
                     ),
                     child: const Text('Back to Relva'),
                   ),
@@ -127,7 +121,10 @@ class MapotekLandingPage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange[600],
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
                     ),
                     child: const Text('Open Full App'),
                   ),
@@ -165,17 +162,16 @@ class _MainPageState extends State<MainPage> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Color(0xFF667eea),
-              Color(0xFF764ba2),
-            ],
+            colors: [Color(0xFF667eea), Color(0xFF764ba2)],
           ),
         ),
         child: Column(
           children: [
             _buildNavigation(),
             Expanded(
-              child: selectedIndex == 0 ? const HomePage() : const ProductPage(),
+              child: selectedIndex == 0
+                  ? const HomePage()
+                  : const ProductPage(),
             ),
           ],
         ),
@@ -287,11 +283,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 16),
           const Text(
             'Your trusted partner in digital innovation and creative solutions. We transform ideas into powerful digital experiences.',
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              height: 1.6,
-            ),
+            style: TextStyle(fontSize: 20, color: Colors.white, height: 1.6),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 32),
@@ -323,39 +315,49 @@ class HomePage extends StatelessWidget {
       {
         'icon': '🚀',
         'title': 'Innovation First',
-        'description': 'We stay ahead of technology trends to deliver cutting-edge solutions that give your business a competitive advantage in the digital landscape.',
+        'description':
+            'We stay ahead of technology trends to deliver cutting-edge solutions that give your business a competitive advantage in the digital landscape.',
       },
       {
         'icon': '💡',
         'title': 'Creative Solutions',
-        'description': 'Our team combines technical expertise with creative thinking to solve complex problems and bring your vision to life with elegant, user-friendly applications.',
+        'description':
+            'Our team combines technical expertise with creative thinking to solve complex problems and bring your vision to life with elegant, user-friendly applications.',
       },
       {
         'icon': '🎯',
         'title': 'Results Driven',
-        'description': 'Every project is focused on delivering measurable results that help your business grow, improve efficiency, and enhance user satisfaction.',
+        'description':
+            'Every project is focused on delivering measurable results that help your business grow, improve efficiency, and enhance user satisfaction.',
       },
       {
         'icon': '🤝',
         'title': 'Partnership Approach',
-        'description': 'We work closely with our clients as true partners, understanding your goals and providing ongoing support to ensure long-term success.',
+        'description':
+            'We work closely with our clients as true partners, understanding your goals and providing ongoing support to ensure long-term success.',
       },
       {
         'icon': '⚡',
         'title': 'Fast & Reliable',
-        'description': 'Our development process is optimized for speed without compromising quality, ensuring your projects are delivered on time and perform flawlessly.',
+        'description':
+            'Our development process is optimized for speed without compromising quality, ensuring your projects are delivered on time and perform flawlessly.',
       },
       {
         'icon': '🛡️',
         'title': 'Secure & Scalable',
-        'description': 'We build applications with security and scalability in mind, ensuring your digital assets can grow with your business while staying protected.',
+        'description':
+            'We build applications with security and scalability in mind, ensuring your digital assets can grow with your business while staying protected.',
       },
     ];
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        int crossAxisCount = constraints.maxWidth > 1200 ? 3 : constraints.maxWidth > 800 ? 2 : 1;
-        
+        int crossAxisCount = constraints.maxWidth > 1200
+            ? 3
+            : constraints.maxWidth > 800
+            ? 2
+            : 1;
+
         return GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -399,10 +401,7 @@ class HomePage extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(
-                  icon,
-                  style: const TextStyle(fontSize: 24),
-                ),
+                Text(icon, style: const TextStyle(fontSize: 24)),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
@@ -473,11 +472,7 @@ class ProductPage extends StatelessWidget {
           SizedBox(height: 16),
           Text(
             'Discover our range of innovative digital solutions designed to transform your business operations and enhance user experiences.',
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-              height: 1.6,
-            ),
+            style: TextStyle(fontSize: 18, color: Colors.white, height: 1.6),
             textAlign: TextAlign.center,
           ),
         ],
@@ -491,7 +486,8 @@ class ProductPage extends StatelessWidget {
       {
         'icon': '🏥',
         'title': 'MAPOTEK',
-        'description': 'Solusi Cerdas untuk Praktik Dokter di Rumah - Desktop application for home-based medical practice management',
+        'description':
+            'Solusi Cerdas untuk Praktik Dokter di Rumah - Desktop application for home-based medical practice management',
         'features': [
           'Login Multi-Role (Owner, Admin, Dokter)',
           'Manajemen Data Pasien Digital',
@@ -530,7 +526,8 @@ class ProductPage extends StatelessWidget {
       {
         'icon': '🔧',
         'title': 'Custom Software',
-        'description': 'Tailored software solutions for your specific business needs',
+        'description':
+            'Tailored software solutions for your specific business needs',
         'features': [
           'Business analysis',
           'Custom development',
@@ -543,8 +540,12 @@ class ProductPage extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        int crossAxisCount = constraints.maxWidth > 1200 ? 3 : constraints.maxWidth > 800 ? 2 : 1;
-        
+        int crossAxisCount = constraints.maxWidth > 1200
+            ? 3
+            : constraints.maxWidth > 800
+            ? 2
+            : 1;
+
         return GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -570,12 +571,22 @@ class ProductPage extends StatelessWidget {
       },
     );
   }
-  Widget _buildProductCard(BuildContext context, String icon, String title, String description, List<String> features, {bool isMainProduct = false}) {
+
+  Widget _buildProductCard(
+    BuildContext context,
+    String icon,
+    String title,
+    String description,
+    List<String> features, {
+    bool isMainProduct = false,
+  }) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.95),
         borderRadius: BorderRadius.circular(16),
-        border: isMainProduct ? Border.all(color: const Color(0xFF2E7D8E), width: 3) : null,
+        border: isMainProduct
+            ? Border.all(color: const Color(0xFF2E7D8E), width: 3)
+            : null,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -592,9 +603,13 @@ class ProductPage extends StatelessWidget {
             width: double.infinity,
             height: isMainProduct ? 140 : 120,
             decoration: BoxDecoration(
-              gradient: isMainProduct 
-                ? const LinearGradient(colors: [Color(0xFF2E7D8E), Color(0xFF1A5F6E)])
-                : const LinearGradient(colors: [Color(0xFF667eea), Color(0xFF764ba2)]),
+              gradient: isMainProduct
+                  ? const LinearGradient(
+                      colors: [Color(0xFF2E7D8E), Color(0xFF1A5F6E)],
+                    )
+                  : const LinearGradient(
+                      colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+                    ),
               borderRadius: BorderRadius.only(
                 topLeft: const Radius.circular(16),
                 topRight: const Radius.circular(16),
@@ -603,14 +618,14 @@ class ProductPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  icon,
-                  style: TextStyle(fontSize: isMainProduct ? 56 : 48),
-                ),
+                Text(icon, style: TextStyle(fontSize: isMainProduct ? 56 : 48)),
                 if (isMainProduct)
                   Container(
                     margin: const EdgeInsets.only(top: 8),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(12),
@@ -627,7 +642,7 @@ class ProductPage extends StatelessWidget {
               ],
             ),
           ),
-          
+
           // Product Content
           Expanded(
             child: Padding(
@@ -646,43 +661,45 @@ class ProductPage extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     description,
-                    style: const TextStyle(
-                      color: Colors.black87,
-                      height: 1.4,
-                    ),
+                    style: const TextStyle(color: Colors.black87, height: 1.4),
                   ),
                   const SizedBox(height: 16),
-                  
+
                   // Features List
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: features.take(isMainProduct ? 6 : 4).map((feature) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2),
-                        child: Row(
-                          children: [
-                            const Text(
-                              '✓ ',
-                              style: TextStyle(
-                                color: Color(0xFF2E7D8E),
-                                fontWeight: FontWeight.bold,
+                      children: features
+                          .take(isMainProduct ? 6 : 4)
+                          .map(
+                            (feature) => Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 2),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    '✓ ',
+                                    style: TextStyle(
+                                      color: Color(0xFF2E7D8E),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      feature,
+                                      style: const TextStyle(
+                                        color: Colors.black87,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            Expanded(
-                              child: Text(
-                                feature,
-                                style: const TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )).toList(),
+                          )
+                          .toList(),
                     ),
                   ),
-                  
+
                   // CTA Button
                   const SizedBox(height: 16),
                   SizedBox(
@@ -696,16 +713,18 @@ class ProductPage extends StatelessWidget {
                           // Handle other products
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text('Learn more about $title - Coming soon!'),
+                              content: Text(
+                                'Learn more about $title - Coming soon!',
+                              ),
                               backgroundColor: const Color(0xFF2E7D8E),
                             ),
                           );
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: isMainProduct 
-                          ? Colors.orange[600] 
-                          : const Color(0xFF2E7D8E),
+                        backgroundColor: isMainProduct
+                            ? Colors.orange[600]
+                            : const Color(0xFF2E7D8E),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         shape: RoundedRectangleBorder(
