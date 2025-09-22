@@ -7,15 +7,16 @@ import 'package:relva_studio/home.dart';
 import 'package:relva_studio/image_detail.dart';
 import 'package:relva_studio/pricing.dart';
 import 'package:relva_studio/privacy_policy.dart';
+import 'package:relva_studio/relvastudioapp.dart' as relva;
 import 'package:relva_studio/terms.dart';
 
 void main() {
-  runApp(const MapotekApp());
+  runApp(const relva.RelvaApp()); 
 }
 
 class MapotekApp extends StatelessWidget {
   const MapotekApp({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,6 +54,7 @@ class MapotekApp extends StatelessWidget {
         '/privacy': (context) => const PrivacyPolicyPage(),
         '/terms': (context) => const TermsPage(),
         '/customers': (context) => const EnhancedCustomerPage(),
+        '/relva': (context) => const relva.RelvaApp(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/imageDetail') {
