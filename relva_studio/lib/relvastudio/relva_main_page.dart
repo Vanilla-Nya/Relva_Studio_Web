@@ -18,6 +18,12 @@ class _RelvaMainPageState extends State<RelvaMainPage> {
     });
   }
 
+   void _navigateToProducts() {
+    setState(() {
+      selectedIndex = 1; 
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +42,9 @@ class _RelvaMainPageState extends State<RelvaMainPage> {
           children: [
             _buildNavigation(),
             Expanded(
-              child: selectedIndex == 0 ? const RelvaHomePage() : const RelvaProductPage(),
+              child: selectedIndex == 0 
+                ? RelvaHomePage(onNavigateToProducts: _navigateToProducts)
+                : const RelvaProductPage(),
             ),
           ],
         ),

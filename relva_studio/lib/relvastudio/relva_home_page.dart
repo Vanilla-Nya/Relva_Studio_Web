@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class RelvaHomePage extends StatelessWidget {
-  const RelvaHomePage({super.key});
+
+  final VoidCallback? onNavigateToProducts; 
+  
+  const RelvaHomePage({super.key, this.onNavigateToProducts});
 
   @override
   Widget build(BuildContext context) {

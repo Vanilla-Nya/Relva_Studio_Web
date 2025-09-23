@@ -259,16 +259,8 @@ class RelvaProductPage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         if (isMainProduct) {
-                          // Navigate to MAPOTEK - you need to add this route
-                          // Navigator.pushNamed(context, '/mapotek');
-                          
-                          // For now, show a snackbar
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('MAPOTEK app will open here'),
-                              backgroundColor: Color(0xFF2E7D8E),
-                            ),
-                          );
+                          // Navigate to MAPOTEK app using your defined route
+                          Navigator.pushNamed(context, '/mapotek');
                         } else {
                           // Handle other products
                           ScaffoldMessenger.of(context).showSnackBar(
