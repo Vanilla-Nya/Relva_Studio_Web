@@ -10,40 +10,37 @@ class RelvaMainPage extends StatefulWidget {
 }
 
 class _RelvaMainPageState extends State<RelvaMainPage> {
-  int selectedIndex = 0;
-
-  void _onMenuTap(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
-
   void _navigateToProducts() {
-    setState(() {
-      selectedIndex = 1;
-    });
+    // Get the tab controller from DefaultTabController
+    DefaultTabController.of(context).animateTo(1);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFF667eea), Color(0xFF764ba2)],
-          ),
-        ),
-        child: Column(
-          children: [
-            _buildNavigation(),
-            Expanded(
-              child: selectedIndex == 0
-                  ? RelvaHomePage(onNavigateToProducts: _navigateToProducts)
-                  : const RelvaProductPage(),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF667eea), Color(0xFF764ba2)],
             ),
-          ],
+          ),
+          child: Column(
+            children: [
+              _buildNavigation(),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    RelvaHomePage(onNavigateToProducts: _navigateToProducts),
+                    const RelvaProductPage(),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -75,37 +72,26 @@ class _RelvaMainPageState extends State<RelvaMainPage> {
                 color: Color(0xFF2E7D8E),
               ),
             ),
-            Row(
-              children: [
-                _buildNavItem('Home', 0),
-                const SizedBox(width: 20),
-                _buildNavItem('Products', 1),
+            TabBar(
+              isScrollable: true,
+              dividerColor: Colors.transparent,
+              indicatorColor: const Color(0xFF2E7D8E),
+              labelColor: const Color(0xFF2E7D8E),
+              unselectedLabelColor: Colors.black87,
+              labelStyle: const TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 16,
+              ),
+              unselectedLabelStyle: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+              ),
+              tabs: const [
+                Tab(text: 'Home'),
+                Tab(text: 'Products'),
               ],
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(String title, int index) {
-    final isSelected = selectedIndex == index;
-    return GestureDetector(
-      onTap: () => _onMenuTap(index),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF2E7D8E) : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Text(
-          title,
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.black87,
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-          ),
         ),
       ),
     );
