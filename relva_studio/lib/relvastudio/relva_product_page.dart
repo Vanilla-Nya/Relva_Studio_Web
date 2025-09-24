@@ -41,11 +41,7 @@ class RelvaProductPage extends StatelessWidget {
           SizedBox(height: 16),
           Text(
             'Discover our range of innovative digital solutions designed to transform your business operations and enhance user experiences.',
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-              height: 1.6,
-            ),
+            style: TextStyle(fontSize: 18, color: Colors.white, height: 1.6),
             textAlign: TextAlign.center,
           ),
         ],
@@ -59,7 +55,8 @@ class RelvaProductPage extends StatelessWidget {
       {
         'icon': '🏥',
         'title': 'MAPOTEK',
-        'description': 'Solusi Cerdas untuk Praktik Dokter di Rumah - Desktop application for home-based medical practice management',
+        'description':
+            'Solusi Cerdas untuk Praktik Dokter di Rumah - Desktop application for home-based medical practice management',
         'features': [
           'Login Multi-Role (Owner, Admin, Dokter)',
           'Manajemen Data Pasien Digital',
@@ -98,7 +95,8 @@ class RelvaProductPage extends StatelessWidget {
       {
         'icon': '🔧',
         'title': 'Custom Software',
-        'description': 'Tailored software solutions for your specific business needs',
+        'description':
+            'Tailored software solutions for your specific business needs',
         'features': [
           'Business analysis',
           'Custom development',
@@ -111,8 +109,12 @@ class RelvaProductPage extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        int crossAxisCount = constraints.maxWidth > 1200 ? 3 : constraints.maxWidth > 800 ? 2 : 1;
-        
+        int crossAxisCount = constraints.maxWidth > 1200
+            ? 3
+            : constraints.maxWidth > 800
+            ? 2
+            : 1;
+
         return GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -139,15 +141,24 @@ class RelvaProductPage extends StatelessWidget {
     );
   }
 
-  Widget _buildProductCard(BuildContext context, String icon, String title, String description, List<String> features, {bool isMainProduct = false}) {
+  Widget _buildProductCard(
+    BuildContext context,
+    String icon,
+    String title,
+    String description,
+    List<String> features, {
+    bool isMainProduct = false,
+  }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.95),
+        color: Colors.white.withValues(alpha: 0.95),
         borderRadius: BorderRadius.circular(16),
-        border: isMainProduct ? Border.all(color: const Color(0xFF2E7D8E), width: 3) : null,
+        border: isMainProduct
+            ? Border.all(color: const Color(0xFF2E7D8E), width: 3)
+            : null,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 32,
             offset: const Offset(0, 8),
           ),
@@ -161,9 +172,13 @@ class RelvaProductPage extends StatelessWidget {
             width: double.infinity,
             height: isMainProduct ? 140 : 120,
             decoration: BoxDecoration(
-              gradient: isMainProduct 
-                ? const LinearGradient(colors: [Color(0xFF2E7D8E), Color(0xFF1A5F6E)])
-                : const LinearGradient(colors: [Color(0xFF667eea), Color(0xFF764ba2)]),
+              gradient: isMainProduct
+                  ? const LinearGradient(
+                      colors: [Color(0xFF2E7D8E), Color(0xFF1A5F6E)],
+                    )
+                  : const LinearGradient(
+                      colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+                    ),
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(16),
                 topRight: Radius.circular(16),
@@ -172,16 +187,16 @@ class RelvaProductPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  icon,
-                  style: TextStyle(fontSize: isMainProduct ? 56 : 48),
-                ),
+                Text(icon, style: TextStyle(fontSize: isMainProduct ? 56 : 48)),
                 if (isMainProduct)
                   Container(
                     margin: const EdgeInsets.only(top: 8),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Text(
@@ -196,7 +211,7 @@ class RelvaProductPage extends StatelessWidget {
               ],
             ),
           ),
-          
+
           // Product Content
           Expanded(
             child: Padding(
@@ -215,43 +230,45 @@ class RelvaProductPage extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     description,
-                    style: const TextStyle(
-                      color: Colors.black87,
-                      height: 1.4,
-                    ),
+                    style: const TextStyle(color: Colors.black87, height: 1.4),
                   ),
                   const SizedBox(height: 16),
-                  
+
                   // Features List
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: features.take(isMainProduct ? 6 : 4).map((feature) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2),
-                        child: Row(
-                          children: [
-                            const Text(
-                              '✓ ',
-                              style: TextStyle(
-                                color: Color(0xFF2E7D8E),
-                                fontWeight: FontWeight.bold,
+                      children: features
+                          .take(isMainProduct ? 6 : 4)
+                          .map(
+                            (feature) => Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 2),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    '✓ ',
+                                    style: TextStyle(
+                                      color: Color(0xFF2E7D8E),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      feature,
+                                      style: const TextStyle(
+                                        color: Colors.black87,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            Expanded(
-                              child: Text(
-                                feature,
-                                style: const TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )).toList(),
+                          )
+                          .toList(),
                     ),
                   ),
-                  
+
                   // CTA Button
                   const SizedBox(height: 16),
                   SizedBox(
@@ -265,16 +282,18 @@ class RelvaProductPage extends StatelessWidget {
                           // Handle other products
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text('Learn more about $title - Coming soon!'),
+                              content: Text(
+                                'Learn more about $title - Coming soon!',
+                              ),
                               backgroundColor: const Color(0xFF2E7D8E),
                             ),
                           );
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: isMainProduct 
-                          ? Colors.orange[600] 
-                          : const Color(0xFF2E7D8E),
+                        backgroundColor: isMainProduct
+                            ? Colors.orange[600]
+                            : const Color(0xFF2E7D8E),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         shape: RoundedRectangleBorder(

@@ -13,9 +13,11 @@ class ContactPage extends StatelessWidget {
         webOnlyWindowName: "_blank",
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Tidak dapat membuka WhatsApp')),
-      );
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Tidak dapat membuka WhatsApp')),
+        );
+      }
     }
   }
 
@@ -31,9 +33,11 @@ class ContactPage extends StatelessWidget {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Tidak dapat membuka email')),
-      );
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Tidak dapat membuka email')),
+        );
+      }
     }
   }
 
@@ -46,9 +50,11 @@ class ContactPage extends StatelessWidget {
         webOnlyWindowName: '_blank',
       );
     } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Tidak dapat membuka maps')));
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Tidak dapat membuka maps')),
+        );
+      }
     }
   }
 

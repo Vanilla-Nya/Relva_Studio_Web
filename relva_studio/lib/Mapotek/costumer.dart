@@ -16,10 +16,10 @@ class _EnhancedCustomerPageState extends State<EnhancedCustomerPage>
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
-  
+
   bool _isLoading = false;
   int _currentStep = 0;
-  
+
   // Form controllers for better state management
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
@@ -36,23 +36,19 @@ class _EnhancedCustomerPageState extends State<EnhancedCustomerPage>
       duration: const Duration(milliseconds: 800),
       vsync: this,
     );
-    
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
-    
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.5),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.elasticOut,
-    ));
-    
+
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
+
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.5), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.elasticOut,
+          ),
+        );
+
     _animationController.forward();
   }
 
@@ -87,33 +83,39 @@ class _EnhancedCustomerPageState extends State<EnhancedCustomerPage>
     setState(() => _isLoading = true);
 
     try {
-      final url = Uri.parse('https://relva-studio-backend.onrender.com/api/duitku-inquiry');
-      
-      final response = await http.post(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: jsonEncode(_formData),
-      ).timeout(
-        const Duration(seconds: 30),
-        onTimeout: () => throw Exception('Request timeout'),
+      final url = Uri.parse(
+        'https://relva-studio-backend.onrender.com/api/duitku-inquiry',
       );
+
+      final response = await http
+          .post(
+            url,
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: jsonEncode(_formData),
+          )
+          .timeout(
+            const Duration(seconds: 30),
+            onTimeout: () => throw Exception('Request timeout'),
+          );
 
       if (!mounted) return;
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
         final paymentUrl = responseData['paymentUrl'] as String?;
-        
+
         if (paymentUrl != null && paymentUrl.isNotEmpty) {
           await _navigateToPayment(paymentUrl);
         } else {
           _showErrorSnackBar('Invalid payment URL received');
         }
       } else {
-        _showErrorSnackBar('Payment initialization failed: ${response.statusCode}');
+        _showErrorSnackBar(
+          'Payment initialization failed: ${response.statusCode}',
+        );
       }
     } catch (e) {
       if (mounted) {
@@ -205,7 +207,8 @@ class _EnhancedCustomerPageState extends State<EnhancedCustomerPage>
       child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
-        validator: validator ??
+        validator:
+            validator ??
             (value) {
               if (value == null || value.trim().isEmpty) {
                 return '$label is required';
@@ -218,9 +221,7 @@ class _EnhancedCustomerPageState extends State<EnhancedCustomerPage>
         decoration: InputDecoration(
           labelText: label,
           prefixIcon: Icon(icon, color: Theme.of(context).primaryColor),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(
@@ -301,7 +302,7 @@ class _EnhancedCustomerPageState extends State<EnhancedCustomerPage>
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Theme.of(context).primaryColor.withOpacity(0.1),
+              Theme.of(context).primaryColor.withValues(alpha: 0.1),
               Colors.white,
             ],
           ),
@@ -338,7 +339,7 @@ class _EnhancedCustomerPageState extends State<EnhancedCustomerPage>
                         ],
                       ),
                     ),
-                    
+
                     // Form content
                     Expanded(
                       child: AnimatedSwitcher(
@@ -349,7 +350,7 @@ class _EnhancedCustomerPageState extends State<EnhancedCustomerPage>
                         ),
                       ),
                     ),
-                    
+
                     // Navigation buttons
                     Padding(
                       padding: const EdgeInsets.all(16),
@@ -370,14 +371,17 @@ class _EnhancedCustomerPageState extends State<EnhancedCustomerPage>
                               onPressed: _isLoading
                                   ? null
                                   : () {
-                                      if (_currentStep < _formSteps.length - 1) {
+                                      if (_currentStep <
+                                          _formSteps.length - 1) {
                                         setState(() => _currentStep++);
                                       } else {
                                         _processDuitkuPayment();
                                       }
                                     },
                               style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 16,
+                                ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -388,9 +392,10 @@ class _EnhancedCustomerPageState extends State<EnhancedCustomerPage>
                                       width: 20,
                                       child: CircularProgressIndicator(
                                         strokeWidth: 2,
-                                        valueColor: AlwaysStoppedAnimation<Color>(
-                                          Colors.white,
-                                        ),
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                              Colors.white,
+                                            ),
                                       ),
                                     )
                                   : Text(
@@ -436,17 +441,14 @@ class _PaymentPageState extends State<PaymentPage> {
     final phone = '6282132411163';
     final encodedMessage = Uri.encodeComponent(message);
     final uri = Uri.parse('https://wa.me/$phone?text=$encodedMessage');
-    
+
     if (await canLaunchUrl(uri)) {
-      await launchUrl(
-        uri,
-        mode: LaunchMode.externalApplication,
-      );
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Cannot open WhatsApp')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Cannot open WhatsApp')));
       }
     }
   }
@@ -457,18 +459,19 @@ class _PaymentPageState extends State<PaymentPage> {
       scheme: 'mailto',
       path: 'Fontaro990@gmail.com',
       queryParameters: {
-        'subject': 'MAPOTEK Payment Confirmation - ${widget.customerData['firstname']} ${widget.customerData['lastname']}',
+        'subject':
+            'MAPOTEK Payment Confirmation - ${widget.customerData['firstname']} ${widget.customerData['lastname']}',
         'body': message,
       },
     );
-    
+
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Cannot open email')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Cannot open email')));
       }
     }
   }
@@ -476,7 +479,7 @@ class _PaymentPageState extends State<PaymentPage> {
   String _generateInvoiceMessage() {
     final now = DateTime.now();
     final invoiceId = 'INV-${now.millisecondsSinceEpoch}';
-    
+
     return '''
 🧾 INVOICE PEMBAYARAN MAPOTEK
 
@@ -521,7 +524,7 @@ Terima kasih telah mempercayai MAPOTEK! 🙏
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Theme.of(context).primaryColor.withOpacity(0.1),
+              Theme.of(context).primaryColor.withValues(alpha: 0.1),
               Colors.white,
             ],
           ),
@@ -529,7 +532,7 @@ Terima kasih telah mempercayai MAPOTEK! 🙏
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(24.0),
-            child: !_paymentCompleted 
+            child: !_paymentCompleted
                 ? _buildPaymentSection(context)
                 : _buildCompletedSection(context),
           ),
@@ -549,7 +552,7 @@ Terima kasih telah mempercayai MAPOTEK! 🙏
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
+                color: Colors.grey.withValues(alpha: 0.2),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),
@@ -565,19 +568,13 @@ Terima kasih telah mempercayai MAPOTEK! 🙏
               const SizedBox(height: 20),
               const Text(
                 'Ready to Pay',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
               const Text(
                 'Click the button below to open Duitku payment gateway',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 30),
               SizedBox(
@@ -637,7 +634,7 @@ Terima kasih telah mempercayai MAPOTEK! 🙏
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
+                color: Colors.grey.withValues(alpha: 0.2),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),
@@ -645,11 +642,7 @@ Terima kasih telah mempercayai MAPOTEK! 🙏
           ),
           child: Column(
             children: [
-              Icon(
-                Icons.check_circle,
-                size: 80,
-                color: Colors.green,
-              ),
+              Icon(Icons.check_circle, size: 80, color: Colors.green),
               const SizedBox(height: 20),
               const Text(
                 'Payment Completed!',
@@ -663,24 +656,18 @@ Terima kasih telah mempercayai MAPOTEK! 🙏
               Text(
                 'Thank you ${widget.customerData['firstname']}!\nYour MAPOTEK purchase is confirmed.',
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
+                style: const TextStyle(fontSize: 16, color: Colors.grey),
               ),
               const SizedBox(height: 30),
-              
+
               // Contact options
               const Text(
                 'Get Your Invoice & Download Link:',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
-              
+
               // WhatsApp Button
               SizedBox(
                 width: double.infinity,
@@ -698,9 +685,9 @@ Terima kasih telah mempercayai MAPOTEK! 🙏
                   ),
                 ),
               ),
-              
+
               const SizedBox(height: 12),
-              
+
               // Email Button
               SizedBox(
                 width: double.infinity,
@@ -718,9 +705,9 @@ Terima kasih telah mempercayai MAPOTEK! 🙏
                   ),
                 ),
               ),
-              
+
               const SizedBox(height: 20),
-              
+
               // Done button
               TextButton(
                 onPressed: () {

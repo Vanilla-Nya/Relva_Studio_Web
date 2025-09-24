@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RelvaHomePage extends StatelessWidget {
+  final VoidCallback? onNavigateToProducts;
 
-  final VoidCallback? onNavigateToProducts; 
-  
   const RelvaHomePage({super.key, this.onNavigateToProducts});
 
   @override
@@ -44,11 +43,7 @@ class RelvaHomePage extends StatelessWidget {
           const SizedBox(height: 16),
           const Text(
             'Your trusted partner in digital innovation and creative solutions. We transform ideas into powerful digital experiences.',
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              height: 1.6,
-            ),
+            style: TextStyle(fontSize: 20, color: Colors.white, height: 1.6),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 32),
@@ -80,39 +75,49 @@ class RelvaHomePage extends StatelessWidget {
       {
         'icon': '🚀',
         'title': 'Innovation First',
-        'description': 'We stay ahead of technology trends to deliver cutting-edge solutions that give your business a competitive advantage in the digital landscape.',
+        'description':
+            'We stay ahead of technology trends to deliver cutting-edge solutions that give your business a competitive advantage in the digital landscape.',
       },
       {
         'icon': '💡',
         'title': 'Creative Solutions',
-        'description': 'Our team combines technical expertise with creative thinking to solve complex problems and bring your vision to life with elegant, user-friendly applications.',
+        'description':
+            'Our team combines technical expertise with creative thinking to solve complex problems and bring your vision to life with elegant, user-friendly applications.',
       },
       {
         'icon': '🎯',
         'title': 'Results Driven',
-        'description': 'Every project is focused on delivering measurable results that help your business grow, improve efficiency, and enhance user satisfaction.',
+        'description':
+            'Every project is focused on delivering measurable results that help your business grow, improve efficiency, and enhance user satisfaction.',
       },
       {
         'icon': '🤝',
         'title': 'Partnership Approach',
-        'description': 'We work closely with our clients as true partners, understanding your goals and providing ongoing support to ensure long-term success.',
+        'description':
+            'We work closely with our clients as true partners, understanding your goals and providing ongoing support to ensure long-term success.',
       },
       {
         'icon': '⚡',
         'title': 'Fast & Reliable',
-        'description': 'Our development process is optimized for speed without compromising quality, ensuring your projects are delivered on time and perform flawlessly.',
+        'description':
+            'Our development process is optimized for speed without compromising quality, ensuring your projects are delivered on time and perform flawlessly.',
       },
       {
         'icon': '🛡️',
         'title': 'Secure & Scalable',
-        'description': 'We build applications with security and scalability in mind, ensuring your digital assets can grow with your business while staying protected.',
+        'description':
+            'We build applications with security and scalability in mind, ensuring your digital assets can grow with your business while staying protected.',
       },
     ];
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        int crossAxisCount = constraints.maxWidth > 1200 ? 3 : constraints.maxWidth > 800 ? 2 : 1;
-        
+        int crossAxisCount = constraints.maxWidth > 1200
+            ? 3
+            : constraints.maxWidth > 800
+            ? 2
+            : 1;
+
         return GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -139,11 +144,11 @@ class RelvaHomePage extends StatelessWidget {
   Widget _buildFeatureCard(String icon, String title, String description) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.95),
+        color: Colors.white.withValues(alpha: 0.95),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 32,
             offset: const Offset(0, 8),
           ),
@@ -156,10 +161,7 @@ class RelvaHomePage extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(
-                  icon,
-                  style: const TextStyle(fontSize: 24),
-                ),
+                Text(icon, style: const TextStyle(fontSize: 24)),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(

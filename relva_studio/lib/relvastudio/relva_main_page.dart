@@ -18,9 +18,9 @@ class _RelvaMainPageState extends State<RelvaMainPage> {
     });
   }
 
-   void _navigateToProducts() {
+  void _navigateToProducts() {
     setState(() {
-      selectedIndex = 1; 
+      selectedIndex = 1;
     });
   }
 
@@ -32,19 +32,16 @@ class _RelvaMainPageState extends State<RelvaMainPage> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Color(0xFF667eea),
-              Color(0xFF764ba2),
-            ],
+            colors: [Color(0xFF667eea), Color(0xFF764ba2)],
           ),
         ),
         child: Column(
           children: [
             _buildNavigation(),
             Expanded(
-              child: selectedIndex == 0 
-                ? RelvaHomePage(onNavigateToProducts: _navigateToProducts)
-                : const RelvaProductPage(),
+              child: selectedIndex == 0
+                  ? RelvaHomePage(onNavigateToProducts: _navigateToProducts)
+                  : const RelvaProductPage(),
             ),
           ],
         ),
@@ -56,10 +53,10 @@ class _RelvaMainPageState extends State<RelvaMainPage> {
     return Container(
       height: 80,
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.95),
+        color: Colors.white.withValues(alpha: 0.95),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 20,
             offset: const Offset(0, 2),
           ),

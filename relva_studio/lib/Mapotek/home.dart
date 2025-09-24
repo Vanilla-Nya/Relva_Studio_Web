@@ -355,19 +355,19 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 40),
                   ElevatedButton(
                     onPressed: () => Navigator.pushNamed(context, '/contact'),
-                    child: const Text(
-                      'Dapatkan MAPOTEK Sekarang',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange[600],
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(
                         vertical: 24,
                         horizontal: 48,
+                      ),
+                    ),
+                    child: const Text(
+                      'Dapatkan MAPOTEK Sekarang',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -493,53 +493,6 @@ class HomePage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTestimonialCard({
-    required String name,
-    required String comment,
-    required int rating,
-  }) {
-    return Container(
-      width: 300,
-      margin: const EdgeInsets.symmetric(horizontal: 12),
-      child: Card(
-        elevation: 8,
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: List.generate(
-                  rating,
-                  (index) =>
-                      Icon(Icons.star, color: Colors.orange[600], size: 20),
-                ),
-              ),
-              const SizedBox(height: 12),
-              Text(
-                comment,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontStyle: FontStyle.italic,
-                ),
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 12),
-              Text(
-                "- $name",
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );
