@@ -8,7 +8,7 @@ import 'package:relva_studio/Mapotek/image_detail.dart';
 import 'package:relva_studio/Mapotek/pricing.dart';
 import 'package:relva_studio/Mapotek/privacy_policy.dart';
 import 'package:relva_studio/Mapotek/terms.dart';
-import 'package:relva_studio/relvastudio/relva_app.dart';
+import 'package:relva_studio/relvastudio/relva_main_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -47,8 +47,8 @@ class MainApp extends StatelessWidget {
       initialRoute: '/', // This will show Relva website first
       routes: {
         // Relva Studio Website Routes
-        '/': (context) => const RelvaApp(),
-        
+        '/': (context) => const RelvaMainPage(),
+
         // MAPOTEK App Routes
         '/mapotek': (context) => const MapotekApp(),
         '/mapotek/home': (context) => const HomePage(),
