@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class RelvaHomePage extends StatelessWidget {
   final VoidCallback? onNavigateToProducts;
-  
+
   const RelvaHomePage({super.key, this.onNavigateToProducts});
 
   @override
@@ -87,11 +87,11 @@ class RelvaHomePage extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(40),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.95),
+        color: Colors.white.withValues(alpha: 0.95),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 32,
             offset: const Offset(0, 8),
           ),
@@ -111,11 +111,7 @@ class RelvaHomePage extends StatelessWidget {
           const SizedBox(height: 24),
           const Text(
             'Relva is a innovative technology company specializing in creating cutting-edge digital solutions. We transform ideas into powerful applications that drive business growth and enhance user experiences. Our team combines technical expertise with creative thinking to deliver exceptional results for our clients.',
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.black87,
-              height: 1.8,
-            ),
+            style: TextStyle(fontSize: 18, color: Colors.black87, height: 1.8),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 32),
@@ -162,22 +158,26 @@ class RelvaHomePage extends StatelessWidget {
       {
         'icon': '🌐',
         'title': 'Web Applications',
-        'description': 'Custom web solutions built with modern frameworks like Flutter Web and React',
+        'description':
+            'Custom web solutions built with modern frameworks like Flutter Web and React',
       },
       {
         'icon': '📱',
         'title': 'Mobile Applications',
-        'description': 'Cross-platform mobile apps for iOS and Android using Flutter and Dart',
+        'description':
+            'Cross-platform mobile apps for iOS and Android using Flutter and Dart',
       },
       {
         'icon': '💻',
         'title': 'Desktop Applications',
-        'description': 'Professional desktop software solutions for business and productivity',
+        'description':
+            'Professional desktop software solutions for business and productivity',
       },
       {
         'icon': '⚙️',
         'title': 'Custom Software',
-        'description': 'Tailored software development to meet your specific business needs',
+        'description':
+            'Tailored software development to meet your specific business needs',
       },
     ];
 
@@ -202,11 +202,7 @@ class RelvaHomePage extends StatelessWidget {
         const SizedBox(height: 16),
         const Text(
           'We offer comprehensive application development services',
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.white,
-            height: 1.6,
-          ),
+          style: TextStyle(fontSize: 18, color: Colors.white, height: 1.6),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 40),
@@ -242,11 +238,11 @@ class RelvaHomePage extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.95),
+        color: Colors.white.withValues(alpha: 0.95),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 20,
             offset: const Offset(0, 6),
           ),
@@ -255,10 +251,7 @@ class RelvaHomePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            icon,
-            style: const TextStyle(fontSize: 48),
-          ),
+          Text(icon, style: const TextStyle(fontSize: 48)),
           const SizedBox(height: 16),
           Text(
             title,
@@ -288,11 +281,11 @@ class RelvaHomePage extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(40),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.95),
+        color: Colors.white.withValues(alpha: 0.95),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 32,
             offset: const Offset(0, 8),
           ),
@@ -320,10 +313,7 @@ class RelvaHomePage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const Text(
-                  '🏥',
-                  style: TextStyle(fontSize: 64),
-                ),
+                const Text('🏥', style: TextStyle(fontSize: 64)),
                 const SizedBox(height: 16),
                 const Text(
                   'MAPOTEK',
@@ -362,7 +352,10 @@ class RelvaHomePage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange[600],
                     foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 16,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -385,11 +378,11 @@ class RelvaHomePage extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(40),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.95),
+        color: Colors.white.withValues(alpha: 0.95),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 32,
             offset: const Offset(0, 8),
           ),
@@ -409,35 +402,47 @@ class RelvaHomePage extends StatelessWidget {
           const SizedBox(height: 16),
           const Text(
             'Ready to bring your ideas to life? Contact us today!',
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.black87,
-              height: 1.6,
-            ),
+            style: TextStyle(fontSize: 18, color: Colors.black87, height: 1.6),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 32),
           LayoutBuilder(
             builder: (context, constraints) {
               bool isWide = constraints.maxWidth > 600;
-              return isWide 
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _buildContactCard('👤', 'Contact Person', 'Fulan\nProject Manager'),
-                      _buildContactCard('📧', 'Email', 'contact@relva.com\nhello@relva.com'),
-                      _buildContactCard('📱', 'Phone', '+62 812-3456-7890\n+62 821-9876-5432'),
-                    ],
-                  )
-                : Column(
-                    children: [
-                      _buildContactCard('👤', 'Contact Person', 'Fulan - Project Manager'),
-                      const SizedBox(height: 16),
-                      _buildContactCard('📧', 'Email', 'contact@relva.com'),
-                      const SizedBox(height: 16),
-                      _buildContactCard('📱', 'Phone', '+62 812-3456-7890'),
-                    ],
-                  );
+              return isWide
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildContactCard(
+                          '👤',
+                          'Contact Person',
+                          'Fulan\nProject Manager',
+                        ),
+                        _buildContactCard(
+                          '📧',
+                          'Email',
+                          'contact@relva.com\nhello@relva.com',
+                        ),
+                        _buildContactCard(
+                          '📱',
+                          'Phone',
+                          '+62 812-3456-7890\n+62 821-9876-5432',
+                        ),
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        _buildContactCard(
+                          '👤',
+                          'Contact Person',
+                          'Fulan - Project Manager',
+                        ),
+                        const SizedBox(height: 16),
+                        _buildContactCard('📧', 'Email', 'contact@relva.com'),
+                        const SizedBox(height: 16),
+                        _buildContactCard('📱', 'Phone', '+62 812-3456-7890'),
+                      ],
+                    );
             },
           ),
           const SizedBox(height: 32),
@@ -469,15 +474,12 @@ class RelvaHomePage extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       constraints: const BoxConstraints(minWidth: 200),
       decoration: BoxDecoration(
-        color: const Color(0xFF2E7D8E).withOpacity(0.1),
+        color: const Color(0xFF2E7D8E).withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         children: [
-          Text(
-            icon,
-            style: const TextStyle(fontSize: 32),
-          ),
+          Text(icon, style: const TextStyle(fontSize: 32)),
           const SizedBox(height: 12),
           Text(
             title,
@@ -513,10 +515,7 @@ class _ProductFeature extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          icon,
-          style: const TextStyle(fontSize: 24),
-        ),
+        Text(icon, style: const TextStyle(fontSize: 24)),
         const SizedBox(height: 8),
         Text(
           text,
