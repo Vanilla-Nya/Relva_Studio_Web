@@ -416,17 +416,17 @@ class RelvaHomePage extends StatelessWidget {
                         _buildContactCard(
                           '👤',
                           'Contact Person',
-                          'Fulan\nProject Manager',
+                          'Alfon Soetanto\nProject Manager',
                         ),
                         _buildContactCard(
                           '📧',
                           'Email',
-                          'contact@relva.com\nhello@relva.com',
+                          'Fontaro990@gmail.com\n alvinmiha289@gmail.com',
                         ),
                         _buildContactCard(
                           '📱',
                           'Phone',
-                          '+62 812-3456-7890\n+62 821-9876-5432',
+                          '+62 821-3241-1163\n+62 812-1638-225',
                         ),
                       ],
                     )
@@ -438,9 +438,9 @@ class RelvaHomePage extends StatelessWidget {
                           'Fulan - Project Manager',
                         ),
                         const SizedBox(height: 16),
-                        _buildContactCard('📧', 'Email', 'contact@relva.com'),
+                        _buildContactCard('📧', 'Email', 'Fontaro990@gmail.com'),
                         const SizedBox(height: 16),
-                        _buildContactCard('📱', 'Phone', '+62 812-3456-7890'),
+                        _buildContactCard('📱', 'Phone', '+62 821-3241-1163'),
                       ],
                     );
             },
