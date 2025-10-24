@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RelvaHomePage extends StatelessWidget {
   final VoidCallback? onNavigateToProducts;
@@ -19,7 +20,7 @@ class RelvaHomePage extends StatelessWidget {
           const SizedBox(height: 60),
           _buildProductPreview(context),
           const SizedBox(height: 60),
-          _buildContactSection(),
+          _buildContactSection(context),
         ],
       ),
     );
@@ -373,7 +374,7 @@ class RelvaHomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildContactSection() {
+  Widget _buildContactSection(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(40),
@@ -447,23 +448,33 @@ class RelvaHomePage extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           ElevatedButton.icon(
-            onPressed: () {
-              // Add contact action here
-            },
-            icon: const Icon(Icons.mail_outline),
-            label: const Text(
-              'Send Message',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF2E7D8E),
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+          onPressed: () async {
+            final phone = '6282132411163'; // Replace with your number
+            final message = Uri.encodeComponent("Hello! I’d like to ask about your services.");
+            final whatsappUrl = Uri.parse("https://wa.me/$phone?text=$message");
+
+            if (await canLaunchUrl(whatsappUrl)) {
+              await launchUrl(whatsappUrl, mode: LaunchMode.externalApplication);
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Could not open WhatsApp')),
+              );
+            }
+          },
+          icon: const Icon(Icons.call_outlined, color: Colors.white),
+          label: const Text(
+            'Contact via WhatsApp',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF25D366),
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
             ),
           ),
+        ),
         ],
       ),
     );
