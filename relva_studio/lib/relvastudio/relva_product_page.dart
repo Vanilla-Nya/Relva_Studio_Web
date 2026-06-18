@@ -1,34 +1,81 @@
 import 'package:flutter/material.dart';
+import 'package:relva_studio/relvastudio/app_settings.dart';
+import 'package:relva_studio/relvastudio/app_strings.dart';
+import 'package:relva_studio/relvastudio/widgets/custom_animations.dart';
+import 'package:relva_studio/relvastudio/widgets/responsive_layout.dart';
 
 class RelvaProductPage extends StatelessWidget {
-  const RelvaProductPage({super.key});
+  final AppSettings settings;
+  final AppStrings strings;
+
+  const RelvaProductPage({
+    super.key,
+    required this.settings,
+    required this.strings,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final horizontalPadding = EdgeInsets.symmetric(
+      horizontal: ResponsiveLayout.value(
+        context,
+        mobile: 16.0,
+        tablet: 24.0,
+        desktop: 32.0,
+      ),
+    );
+
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.only(top: 110, bottom: 40),
       child: Column(
         children: [
-          _buildHeroSection(),
+          Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1200),
+              child: FadeInSlide(
+                delay: Duration.zero,
+                child: Padding(
+                  padding: horizontalPadding,
+                  child: _buildHeroSection(context),
+                ),
+              ),
+            ),
+          ),
           const SizedBox(height: 40),
-          _buildProductGrid(),
+          Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1200),
+              child: Padding(
+                padding: horizontalPadding,
+                child: _buildProductGrid(context),
+              ),
+            ),
+          ),
+          const SizedBox(height: 80), // space for FAB
+          const ResponsiveFooter(),
         ],
       ),
     );
   }
 
-  Widget _buildHeroSection() {
+  Widget _buildHeroSection(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 60),
-      child: const Column(
+      child: Column(
         children: [
           Text(
-            'Our Products',
+            strings.productsTitle,
             style: TextStyle(
-              fontSize: 48,
+              fontSize: ResponsiveLayout.value(
+                context,
+                mobile: 32.0,
+                tablet: 42.0,
+                desktop: 48.0,
+              ),
               fontWeight: FontWeight.bold,
               color: Colors.white,
-              shadows: [
+              letterSpacing: -1,
+              shadows: const [
                 Shadow(
                   color: Colors.black26,
                   offset: Offset(0, 2),
@@ -38,10 +85,14 @@ class RelvaProductPage extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(
-            'Discover our range of innovative digital solutions designed to transform your business operations and enhance user experiences.',
-            style: TextStyle(fontSize: 18, color: Colors.white, height: 1.6),
+            strings.productsSubtitle,
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.white.withValues(alpha: 0.85),
+              height: 1.6,
+            ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -49,71 +100,106 @@ class RelvaProductPage extends StatelessWidget {
     );
   }
 
-  Widget _buildProductGrid() {
+  Widget _buildProductGrid(BuildContext context) {
     final products = [
-      // Main Product - MAPOTEK (featured)
       {
         'icon': '🏥',
-        'title': 'MAPOTEK',
-        'description':
-            'Solusi Cerdas untuk Praktik Dokter di Rumah - Desktop application for home-based medical practice management',
-        'features': [
-          'Login Multi-Role (Owner, Admin, Dokter)',
-          'Manajemen Data Pasien Digital',
-          'Pemantauan Stok Obat Otomatis',
-          'Absensi Staf Digital',
-          'Pencatatan Keuangan Terstruktur',
-          'Antarmuka User-Friendly',
-        ],
+        'title': 'MAPOTECH',
+        'description': strings.language == AppLanguage.id
+            ? 'Medical Application Platform for Operations, Technology & Connected Healthcare — 1 Ekosistem, 3 Solusi Kesehatan Digital'
+            : 'Medical Application Platform for Operations, Technology & Connected Healthcare — 1 Ecosystem, 3 Digital Health Solutions',
+        'features': strings.language == AppLanguage.id
+            ? [
+                'Smart EMR System (Rekam Medis Elektronik)',
+                'Manajemen Antrean & Pendaftaran Pasien',
+                'Resep Elektronik & Auto E-Prescription',
+                'Smart Pharmacy POS & Manajemen Stok Obat',
+                'Integrasi SATUSEHAT & BPJS',
+                'Role-Based Access (Dokter, Admin, Perawat)',
+              ]
+            : [
+                'Smart EMR System (Electronic Medical Records)',
+                'Queue Management & Patient Registration',
+                'E-Prescription & Auto E-Prescription',
+                'Smart Pharmacy POS & Medicine Stock Management',
+                'SATUSEHAT & BPJS Integration',
+                'Role-Based Access (Doctor, Admin, Nurse)',
+              ],
         'isMain': true,
       },
-      // Future products can be added here
       {
         'icon': '🌐',
-        'title': 'Web Applications',
-        'description': 'Custom web solutions tailored to your business needs',
-        'features': [
-          'Responsive design',
-          'Modern frameworks (Flutter Web, React)',
-          'API integration',
-          'Performance optimization',
-        ],
+        'title': strings.service1Title,
+        'description': strings.service1Desc,
+        'features': strings.language == AppLanguage.id
+            ? [
+                'Desain responsif',
+                'Framework modern (Flutter Web, React)',
+                'Integrasi API',
+                'Optimasi performa',
+              ]
+            : [
+                'Responsive design',
+                'Modern frameworks (Flutter Web, React)',
+                'API integration',
+                'Performance optimization',
+              ],
         'isMain': false,
       },
       {
         'icon': '📱',
-        'title': 'Mobile Applications',
-        'description': 'Cross-platform mobile apps using Flutter and Dart',
-        'features': [
-          'iOS & Android compatibility',
-          'Native performance',
-          'Modern UI/UX design',
-          'Offline functionality',
-        ],
+        'title': strings.service2Title,
+        'description': strings.service2Desc,
+        'features': strings.language == AppLanguage.id
+            ? [
+                'Kompatibilitas iOS & Android',
+                'Performa native',
+                'Desain UI/UX modern',
+                'Fungsionalitas offline',
+              ]
+            : [
+                'iOS & Android compatibility',
+                'Native performance',
+                'Modern UI/UX design',
+                'Offline functionality',
+              ],
         'isMain': false,
       },
       {
         'icon': '🔧',
-        'title': 'Custom Software',
-        'description':
-            'Tailored software solutions for your specific business needs',
-        'features': [
-          'Business analysis',
-          'Custom development',
-          'System integration',
-          'Ongoing support',
-        ],
+        'title': strings.service4Title,
+        'description': strings.service4Desc,
+        'features': strings.language == AppLanguage.id
+            ? [
+                'Analisis bisnis',
+                'Pengembangan kustom',
+                'Integrasi sistem',
+                'Dukungan berkelanjutan',
+              ]
+            : [
+                'Business analysis',
+                'Custom development',
+                'System integration',
+                'Ongoing support',
+              ],
         'isMain': false,
       },
     ];
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        int crossAxisCount = constraints.maxWidth > 1200
-            ? 3
-            : constraints.maxWidth > 800
-            ? 2
-            : 1;
+        int crossAxisCount = ResponsiveLayout.value(
+          context,
+          mobile: 1,
+          tablet: 2,
+          desktop: 3,
+        );
+        double aspectRatio = ResponsiveLayout.value(
+          context,
+          mobile: 0.7,
+          tablet: 0.72,
+          desktop: 0.75,
+        );
 
         return GridView.builder(
           shrinkWrap: true,
@@ -122,18 +208,26 @@ class RelvaProductPage extends StatelessWidget {
             crossAxisCount: crossAxisCount,
             crossAxisSpacing: 20,
             mainAxisSpacing: 20,
-            childAspectRatio: 0.8,
+            childAspectRatio: aspectRatio,
           ),
           itemCount: products.length,
           itemBuilder: (context, index) {
             final product = products[index];
-            return _buildProductCard(
-              context,
-              product['icon']! as String,
-              product['title']! as String,
-              product['description']! as String,
-              product['features']! as List<String>,
-              isMainProduct: product['isMain'] as bool? ?? false,
+            return FadeInSlide(
+              delay: Duration(milliseconds: 100 * index),
+              duration: const Duration(milliseconds: 600),
+              child: HoverCard(
+                hoverOffset: -8,
+                hoverScale: 1.025,
+                child: _buildProductCard(
+                  context,
+                  product['icon']! as String,
+                  product['title']! as String,
+                  product['description']! as String,
+                  product['features']! as List<String>,
+                  isMainProduct: product['isMain'] as bool? ?? false,
+                ),
+              ),
             );
           },
         );
@@ -151,14 +245,17 @@ class RelvaProductPage extends StatelessWidget {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.95),
-        borderRadius: BorderRadius.circular(16),
+        color: settings.cardColor.withValues(alpha: 0.96),
+        borderRadius: BorderRadius.circular(20),
         border: isMainProduct
-            ? Border.all(color: const Color(0xFF2E7D8E), width: 3)
-            : null,
+            ? Border.all(color: settings.primaryColor, width: 2.5)
+            : Border.all(
+                color: settings.primaryColor.withValues(alpha: 0.1)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: isMainProduct
+                ? settings.primaryColor.withValues(alpha: 0.2)
+                : Colors.black.withValues(alpha: 0.1),
             blurRadius: 32,
             offset: const Offset(0, 8),
           ),
@@ -167,7 +264,7 @@ class RelvaProductPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Product Icon/Image
+          // Header gradient banner
           Container(
             width: double.infinity,
             height: isMainProduct ? 140 : 120,
@@ -176,35 +273,50 @@ class RelvaProductPage extends StatelessWidget {
                   ? const LinearGradient(
                       colors: [Color(0xFF2E7D8E), Color(0xFF1A5F6E)],
                     )
-                  : const LinearGradient(
-                      colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+                  : LinearGradient(
+                      colors: [
+                        settings.primaryColor.withValues(alpha: 0.8),
+                        settings.primaryColor,
+                      ],
                     ),
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
               ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(icon, style: TextStyle(fontSize: isMainProduct ? 56 : 48)),
+                if (isMainProduct)
+                  Image.asset(
+                    'assets/logo_MAPOTECH.png',
+                    height: 56,
+                    errorBuilder: (context, error, stackTrace) => Text(
+                      icon,
+                      style: const TextStyle(fontSize: 56),
+                    ),
+                  )
+                else
+                  Text(
+                    icon,
+                    style: const TextStyle(fontSize: 48),
+                  ),
                 if (isMainProduct)
                   Container(
                     margin: const EdgeInsets.only(top: 8),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 4,
-                    ),
+                        horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Text(
-                      'FLAGSHIP PRODUCT',
-                      style: TextStyle(
+                    child: Text(
+                      strings.flagship,
+                      style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 12,
+                        fontSize: 11,
                         fontWeight: FontWeight.bold,
+                        letterSpacing: 1.5,
                       ),
                     ),
                   ),
@@ -212,7 +324,7 @@ class RelvaProductPage extends StatelessWidget {
             ),
           ),
 
-          // Product Content
+          // Content
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(20),
@@ -222,70 +334,68 @@ class RelvaProductPage extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      fontSize: isMainProduct ? 24 : 20,
+                      fontSize: isMainProduct ? 22 : 18,
                       fontWeight: FontWeight.bold,
-                      color: const Color(0xFF2E7D8E),
+                      color: settings.primaryColor,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 6),
                   Text(
                     description,
-                    style: const TextStyle(color: Colors.black87, height: 1.4),
+                    style: TextStyle(
+                        color: settings.subTextColor, height: 1.4, fontSize: 13),
                   ),
-                  const SizedBox(height: 16),
-
-                  // Features List
+                  const SizedBox(height: 14),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: features
-                          .take(isMainProduct ? 6 : 4)
-                          .map(
-                            (feature) => Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 2),
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    '✓ ',
-                                    style: TextStyle(
-                                      color: Color(0xFF2E7D8E),
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      feature,
-                                      style: const TextStyle(
-                                        color: Colors.black87,
-                                        fontSize: 14,
+                    child: SingleChildScrollView(
+                      physics: const ClampingScrollPhysics(),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: features
+                            .take(isMainProduct ? 6 : 4)
+                            .map(
+                              (feature) => Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 2),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      '✓ ',
+                                      style: TextStyle(
+                                        color: settings.primaryColor,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    Expanded(
+                                      child: Text(
+                                        feature,
+                                        style: TextStyle(
+                                          color: settings.subTextColor,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          )
-                          .toList(),
+                            )
+                            .toList(),
+                      ),
                     ),
                   ),
-
-                  // CTA Button
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
                         if (isMainProduct) {
-                          // Navigate to MAPOTEK app using your defined route
-                          Navigator.pushNamed(context, '/mapotek');
+                          Navigator.pushNamed(context, '/mapotech');
                         } else {
-                          // Handle other products
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                'Learn more about $title - Coming soon!',
-                              ),
-                              backgroundColor: const Color(0xFF2E7D8E),
+                                  '$title – ${strings.comingSoon}'),
+                              backgroundColor: settings.primaryColor,
                             ),
                           );
                         }
@@ -293,15 +403,17 @@ class RelvaProductPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: isMainProduct
                             ? Colors.orange[600]
-                            : const Color(0xFF2E7D8E),
+                            : settings.primaryColor,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        padding:
+                            const EdgeInsets.symmetric(vertical: 12),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(10),
                         ),
+                        elevation: 4,
                       ),
                       child: Text(
-                        isMainProduct ? 'Try MAPOTEK' : 'Learn More',
+                        isMainProduct ? strings.tryMapotech : strings.learnMore,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),

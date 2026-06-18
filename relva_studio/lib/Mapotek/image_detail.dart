@@ -19,20 +19,27 @@ class ImageDetailPage extends StatelessWidget {
         foregroundColor: Colors.white,
       ),
       body: Center(
-        child: Hero(
-          tag: tag,
-          child: Card(
-            elevation: 16,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.contain,
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: MediaQuery.of(context).size.height * 0.7,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Hero(
+            tag: tag,
+            child: Card(
+              elevation: 16,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.85,
+                    maxHeight: MediaQuery.of(context).size.height * 0.8,
+                  ),
+                  child: Image.asset(
+                    imagePath,
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
             ),
           ),

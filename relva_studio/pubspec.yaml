@@ -68,6 +68,8 @@ flutter:
   - assets/mapotek_3.jpg
   - assets/mapotek_4.jpg
   - assets/poster_mapotek.jpg
+  - assets/logo_MAPOTECH.png
+  - assets/Relva_Studio_Logo_Remove_BG.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
