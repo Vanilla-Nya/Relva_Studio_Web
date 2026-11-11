@@ -1,6 +1,11 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:relva_studio/relvastudio/app_settings.dart';
+import 'package:relva_studio/relvastudio/cv_page.dart';
+import 'package:relva_studio/relvastudio/models/cv_profile_data.dart';
+import 'package:relva_studio/relvastudio/widgets/card_media_background.dart';
+import 'package:relva_studio/relvastudio/widgets/custom_animations.dart';
 import 'package:relva_studio/relvastudio/widgets/responsive_layout.dart';
 
 class MapotechHomePage extends StatefulWidget {
@@ -95,6 +100,7 @@ class _MapotechHomePageState extends State<MapotechHomePage>
               _buildIntegrationSection(),
               _buildSecuritySection(),
               _buildStatusSection(),
+              _buildContributorsSection(context),
               _buildCTASection(context),
             ],
           ),
@@ -2176,6 +2182,505 @@ class _MapotechHomePageState extends State<MapotechHomePage>
           ),
         ],
       ),
+    );
+  }
+
+  // ─── Contributors Section ───────────────────────────────────────────────────
+  Widget _buildContributorsSection(BuildContext context) {
+    final alfon = CvProfileRepository.alfon;
+    final alvin = CvProfileRepository.alvin;
+
+    return Container(
+      width: double.infinity,
+      color: _settings.surfaceColor.withValues(alpha: 0.35),
+      padding: const EdgeInsets.symmetric(vertical: 68, horizontal: 24),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1240),
+          child: Column(
+            children: [
+              _sectionTitle(
+                _isEn
+                    ? '👥 Core Creators & Contributors'
+                    : '👥 Tim Arsitek & Kontributor Utama',
+                subtitle: _isEn
+                    ? 'Meet the engineers, systems architects, and visionaries building MAPOTECH and the Relva Studio ecosystem.'
+                    : 'Kenali para arsitek sistem, insinyur perangkat lunak, dan inovator di balik pengembangan platform MAPOTECH dan ekosistem Relva Studio.',
+              ),
+              const SizedBox(height: 40),
+              ResponsiveLayout(
+                mobile: Column(
+                  children: [
+                    _buildContributorCard(context, alfon),
+                    const SizedBox(height: 28),
+                    _buildContributorCard(context, alvin),
+                  ],
+                ),
+                desktop: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: _buildContributorCard(context, alfon)),
+                    const SizedBox(width: 28),
+                    Expanded(child: _buildContributorCard(context, alvin)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContributorCard(BuildContext context, CvProfileData profile) {
+    final isAlfon = profile.id == 'alfon';
+    final isDark = _settings.theme == AppThemeMode.dark;
+
+    final badgeGradient = isAlfon
+        ? const LinearGradient(
+            colors: [Color(0xFF9B6DD6), Color(0xFFF06292)],
+          )
+        : const LinearGradient(
+            colors: [Color(0xFF00B4D8), Color(0xFF7209B7)],
+          );
+
+    final highlightTag = isAlfon
+        ? '👑 OWNER & FOUNDER'
+        : (_isEn ? '🏥 RSU BONDOWOSO • CORE' : '🏥 RSU BONDOWOSO • TIM INTI');
+
+    final educationSubtitle = isAlfon
+        ? (_isEn
+            ? 'Politeknik Negeri Jember (Polije) • Class of 2024'
+            : 'Politeknik Negeri Jember (Polije) • Angkatan 2024')
+        : (_isEn
+            ? 'Politeknik Negeri Jember (Polije) • Class of 2018 (Graduated 2024)'
+            : 'Politeknik Negeri Jember (Polije) • Angkatan 2018 (Lulus 2024)');
+
+    return HoverCard(
+      hoverOffset: -6.0,
+      hoverScale: 1.015,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CvPage(profileId: profile.id),
+              ),
+            );
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(
+                color: _settings.primaryColor.withValues(alpha: 0.22),
+                width: 1.5,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: isDark ? 0.35 : 0.08),
+                  blurRadius: 28,
+                  offset: const Offset(0, 10),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: CardMediaBackground(
+                mediaPath: profile.backgroundMedia,
+                uniqueId: 'contrib-${profile.id}',
+                overlayAlpha: isDark ? 0.74 : 0.82,
+                borderRadius: BorderRadius.circular(24),
+                child: Padding(
+                  padding: const EdgeInsets.all(26),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Header Row: Avatar + Info + Badge
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildFadedSquareAvatar(profile),
+                          const SizedBox(width: 18),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                        vertical: 4,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        gradient: badgeGradient,
+                                        borderRadius: BorderRadius.circular(20),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: (isAlfon
+                                                    ? const Color(0xFF9B6DD6)
+                                                    : const Color(0xFF00B4D8))
+                                                .withValues(alpha: 0.3),
+                                            blurRadius: 8,
+                                            offset: const Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Text(
+                                        highlightTag,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 10.5,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 0.6,
+                                        ),
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 3,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.green.withValues(alpha: 0.15),
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: Colors.green.withValues(alpha: 0.35),
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Container(
+                                            width: 6,
+                                            height: 6,
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Colors.green,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 5),
+                                          Text(
+                                            _isEn ? 'Active' : 'Aktif',
+                                            style: const TextStyle(
+                                              color: Colors.green,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  profile.name,
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: _settings.textColor,
+                                    letterSpacing: 0.2,
+                                  ),
+                                ),
+                                const SizedBox(height: 3),
+                                Text(
+                                  _isEn ? profile.roleEn : profile.roleId,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                    color: _settings.primaryColor,
+                                    height: 1.3,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.school_outlined,
+                                      size: 13,
+                                      color: _settings.textColor.withValues(alpha: 0.5),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Expanded(
+                                      child: Text(
+                                        educationSubtitle,
+                                        style: TextStyle(
+                                          fontSize: 11.5,
+                                          color: _settings.textColor.withValues(alpha: 0.6),
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 18),
+                      // Short Bio Snippet
+                      Text(
+                        _isEn ? profile.bioShortEn : profile.bioShortId,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: _settings.textColor.withValues(alpha: 0.72),
+                          height: 1.5,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      // Metric Counters
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+                        decoration: BoxDecoration(
+                          color: _settings.surfaceColor.withValues(alpha: 0.45),
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(
+                            color: _settings.primaryColor.withValues(alpha: 0.12),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            _buildMiniMetric(
+                              profile.experienceYears,
+                              _isEn ? 'Experience' : 'Pengalaman',
+                            ),
+                            Container(
+                              height: 24,
+                              width: 1,
+                              color: _settings.primaryColor.withValues(alpha: 0.15),
+                            ),
+                            _buildMiniMetric(
+                              profile.deliveredProjects,
+                              _isEn ? 'Delivered' : 'Proyek Selesai',
+                            ),
+                            Container(
+                              height: 24,
+                              width: 1,
+                              color: _settings.primaryColor.withValues(alpha: 0.15),
+                            ),
+                            _buildMiniMetric(
+                              profile.techFrameworks,
+                              _isEn ? 'Frameworks' : 'Framework',
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      // Specialization Tags
+                      Wrap(
+                        spacing: 6,
+                        runSpacing: 6,
+                        children: (profile.skills.take(5).map((s) => s['name'] as String).toList()
+                              ..addAll(isAlfon
+                                  ? ['RevGEO API', 'RevHelix Automation']
+                                  : ['SIMRS Systems', 'Clean Architecture']))
+                            .take(6)
+                            .map((tag) => Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: _settings.primaryColor.withValues(alpha: 0.08),
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                      color: _settings.primaryColor.withValues(alpha: 0.18),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    tag,
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: _settings.textColor.withValues(alpha: 0.8),
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                      ),
+                      const SizedBox(height: 20),
+                      // Interactive Action Footer
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              _settings.primaryColor.withValues(alpha: 0.15),
+                              _settings.accentColor.withValues(alpha: 0.10),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: _settings.primaryColor.withValues(alpha: 0.3),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.badge_rounded,
+                              size: 16,
+                              color: _settings.primaryColor,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              _isEn
+                                  ? 'View Full Interactive CV & Portfolio'
+                                  : 'Lihat CV & Portofolio Interaktif Lengkap',
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                color: _settings.primaryColor,
+                                letterSpacing: 0.2,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            Icon(
+                              Icons.arrow_forward_rounded,
+                              size: 15,
+                              color: _settings.primaryColor,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFadedSquareAvatar(CvProfileData profile) {
+    const double size = 94.0;
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: _settings.primaryColor.withValues(alpha: 0.25),
+            blurRadius: 16,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            // Layer 1: Sharp base image
+            Image.asset(
+              profile.photoAsset,
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) => Container(
+                color: _settings.surfaceColor,
+                child: Center(
+                  child: Text(
+                    profile.initials,
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: _settings.primaryColor,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // Layer 2: Blurred image with ShaderMask so blur gets stronger towards the square perimeter
+            ShaderMask(
+              shaderCallback: (bounds) {
+                return const RadialGradient(
+                  center: Alignment.center,
+                  radius: 0.72,
+                  colors: [
+                    Colors.transparent,
+                    Colors.transparent,
+                    Colors.white,
+                  ],
+                  stops: [0.0, 0.40, 1.0],
+                ).createShader(bounds);
+              },
+              blendMode: BlendMode.dstIn,
+              child: ImageFiltered(
+                imageFilter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                child: Image.asset(
+                  profile.photoAsset,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+                ),
+              ),
+            ),
+            // Layer 3: Soft radial color diffusion towards the box edges
+            Container(
+              decoration: BoxDecoration(
+                gradient: RadialGradient(
+                  center: Alignment.center,
+                  radius: 0.75,
+                  colors: [
+                    Colors.transparent,
+                    Colors.transparent,
+                    _settings.cardColor.withValues(alpha: 0.50),
+                  ],
+                  stops: const [0.0, 0.48, 1.0],
+                ),
+              ),
+            ),
+            // Layer 4: Stylish border
+            DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: _settings.primaryColor.withValues(alpha: 0.35),
+                  width: 1.5,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMiniMetric(String value, String label) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: _settings.textColor,
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 10.5,
+            color: _settings.textColor.withValues(alpha: 0.55),
+          ),
+        ),
+      ],
     );
   }
 

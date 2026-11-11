@@ -18,6 +18,7 @@ import 'package:relva_studio/Mapotek/pricing.dart';
 import 'package:relva_studio/Mapotek/privacy_policy.dart';
 import 'package:relva_studio/Mapotek/terms.dart';
 import 'package:relva_studio/relvastudio/app_settings.dart';
+import 'package:relva_studio/relvastudio/cv_page.dart';
 import 'package:relva_studio/relvastudio/relva_main_page.dart';
 
 void main() {
@@ -54,6 +55,8 @@ class _MainAppState extends State<MainApp> {
             routes: {
               // Relva Studio Website Routes
               '/': (context) => const RelvaMainPage(),
+              '/cv': (context) => const CvPage(),
+              '/resume': (context) => const CvPage(),
 
               // MAPOTECH Product Page (new comprehensive page)
               '/mapotech': (context) => const MapotechHomePage(),

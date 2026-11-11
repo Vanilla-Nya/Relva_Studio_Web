@@ -91,7 +91,13 @@ class ResponsivePageTemplate extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: IconButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () {
+                if (Navigator.of(context).canPop()) {
+                  Navigator.of(context).pop();
+                } else {
+                  Navigator.of(context).pushReplacementNamed('/');
+                }
+              },
               style: IconButton.styleFrom(
                 backgroundColor: settings.cardColor.withValues(alpha: 0.9),
                 shape: RoundedRectangleBorder(
@@ -108,33 +114,35 @@ class ResponsivePageTemplate extends StatelessWidget {
         );
 
         // Core content laid out inside responsive constraints
-        Widget content = Center(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: maxContentWidth ?? 1200.0,
-            ),
-            child: SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: padding ?? EdgeInsets.symmetric(
-                  horizontal: ResponsiveLayout.value(
-                    context,
-                    mobile: 16.0,
-                    tablet: 24.0,
-                    desktop: 40.0,
+        Widget content = fullWidth
+            ? child
+            : Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: maxContentWidth ?? 1200.0,
                   ),
-                  vertical: ResponsiveLayout.value(
-                    context,
-                    mobile: 16.0,
-                    tablet: 24.0,
-                    desktop: 32.0,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Padding(
+                      padding: padding ?? EdgeInsets.symmetric(
+                        horizontal: ResponsiveLayout.value(
+                          context,
+                          mobile: 16.0,
+                          tablet: 24.0,
+                          desktop: 40.0,
+                        ),
+                        vertical: ResponsiveLayout.value(
+                          context,
+                          mobile: 16.0,
+                          tablet: 24.0,
+                          desktop: 32.0,
+                        ),
+                      ),
+                      child: child,
+                    ),
                   ),
                 ),
-                child: child,
-              ),
-            ),
-          ),
-        );
+              );
 
         Widget mainBody;
         if (isScrollable) {
